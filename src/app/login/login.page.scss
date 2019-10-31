@@ -1,0 +1,81 @@
+ion-slides{
+    background-image: url('/assets/bg.jpeg');
+
+	ion-slide{
+	    height: 100vh;
+	    overflow-y: scroll;
+	    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		display: flex;
+	    flex-direction: column;
+	    justify-content: space-between;
+
+	    ion-content{
+	    	--background: transparent;
+	    }
+
+		img {
+		  max-height: 50%;
+		  max-width: 60%;
+		  margin: 36px 0;
+		}
+		.q-div{
+			display: flex;
+			flex-direction: column;
+			min-height: 40vh;
+			width: 90%;
+			align-items: center;
+		    box-sizing: border-box;
+		    justify-content: center;
+		    background: #fff;
+		    border-radius: 10px;
+		    margin: 15px auto;
+		    position: relative;
+
+		    .q-number{
+		    	position: absolute;
+			    bottom: -20px;
+			    background: #fff;
+			    padding: 7px;
+			    border-radius: 30px;
+		    }
+		    
+			h3{
+				margin: auto 2px;
+			    padding: 20px;
+			    font-weight: 900;
+			}
+		}
+
+		ion-card.title{
+	    	--background: #fff;
+		}
+		.answer-box{
+			margin: 10px;
+			min-width: 320px;
+			margin-bottom: 100px;
+		    ion-card{
+		    	--background: #fff;
+			    padding: 20px;
+				font-family: 'Avenir', Helvetica, Arial, sans-serif;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+		    }
+		}
+	}
+}
+
+.close-button{
+    top: -33px;
+    left: -16px;
+    ion-fab-button{
+    	--border-radius: 0px;
+    	height: 92px;
+	    transform: rotate(45deg);
+
+	    ion-icon{
+	    	margin-left: 15px;
+	    }
+    }
+}

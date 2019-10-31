@@ -1,0 +1,55 @@
+<form class="custom-back ion-text-center" padding [formGroup]="myForm">
+
+<!--     <ion-item>
+		<ion-input formControlName="username" placeholder="Username"></ion-input>
+	</ion-item>
+	<div class="invalid" *ngIf="!myForm.controls.username.valid  && (myForm.controls.username.dirty || submitAttempt)">
+        <p>Please enter a valid username.</p>
+    </div>
+
+	<ion-item>
+		<ion-input type="password" formControlName="password" placeholder="Password" clear-input="true"></ion-input>
+	</ion-item>
+	<div class="invalid" *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)">
+        <p>Please enter a valid Password.</p>
+    </div> -->
+
+    <ion-item>
+		<ion-label position="stacked">Age <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input required type="number"></ion-input>
+	</ion-item>
+
+	<ion-item>
+		<ion-label position="stacked">Country <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input placeholder=""></ion-input>
+	</ion-item>
+
+	<ion-item>
+		<ion-label position="stacked">State <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input placeholder=""></ion-input>
+	</ion-item>
+
+	<ion-item>
+		<ion-label position="stacked">City <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input placeholder=""></ion-input>
+	</ion-item>
+
+	<ion-item>
+		<ion-label position="stacked">Sampraday <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input placeholder=""></ion-input>
+	</ion-item>
+
+	<ion-item>
+		<ion-label position="stacked">Qualification <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input placeholder=""></ion-input>
+	</ion-item>
+
+	<ion-item>
+		<ion-label position="stacked">Notes</ion-label>
+		<ion-textarea></ion-textarea>
+	</ion-item>
+
+    <div class="ion-padding">
+	    <ion-button  color="primary" (click)="onSubmit()">Continue</ion-button>
+	</div>
+</form>

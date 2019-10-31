@@ -1,0 +1,62 @@
+<!-- <ion-header mode="ios">
+  <ion-toolbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content fullscreen>
+	<ion-fab vertical="top" horizontal="start" slot="fixed" class="close-button">
+    <ion-fab-button color="danger">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-slides [options]="slideOpts" (ionSlideWillChange)="slideChanged()" (ionSlideNextStart)="beforeNext()" #slider>
+  	<ion-slide>
+    	<div class="q-div z-depth-4">
+	      <ion-text color="dark">
+				  <h3>Start</h3>
+				</ion-text>
+    	</div>
+    </ion-slide>
+    <ion-slide *ngFor="let quetion of quetions; index as i">
+    	<ion-content fullscreen>
+		  	<div class="q-div z-depth-4">
+		  		<div class="q-number z-depth-4">{{(i+1) +'/'+ quetions.length}}</div>
+		      <ion-text color="dark">
+					  <h3>{{quetion.text}}</h3>
+					</ion-text>
+		  	</div>
+		  	<div class="answer-box">
+		  		<!-- 
+
+				  <button ion-button (click)="previous()">
+				    Make it transparent
+				  </button> -->
+		      <ion-card >
+					  <ion-item color="{{isSelected(quetion, option) ? 'dark' : ''}}" *ngFor="let option of quetion.options" (click)="itemClicked(quetion, option)">
+					    <ion-note slot="start">{{option.tag}}</ion-note>
+					    <ion-text>{{option.text}}</ion-text>
+					  </ion-item>
+					</ion-card>
+		  	</div>
+	    </ion-content>
+    </ion-slide>
+    <ion-slide>
+    	<div class="q-div z-depth-4">
+	      <ion-text color="dark">
+				  <h3>Finish</h3>
+				</ion-text>
+    	</div>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success" (click)="next()">
+      <ion-icon name="arrow-dropright"> Next </ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

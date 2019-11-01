@@ -1,15 +1,19 @@
 .invalid p{
     margin: 0px 4px 21px 4px;
-    text-align: right;
+    text-align: center;
     font-size: 0.8em;
-    color: #f04141;
+    background-color: #f04141;
+    color: #fff;
 }
 
 .custom-back{
 
 	ion-item{
-		margin-bottom: 10px;
-		/*--background: #ececec;*/
+		--background: transparent;
+	    --color: #fff;
+	    --border-color: #fff;
+	    --highlight-color-focused: #fff;
+	    --color-activated: #fff;
 	}
 
 }

@@ -1,52 +1,68 @@
 <form class="custom-back ion-text-center" padding [formGroup]="myForm">
 
-<!--     <ion-item>
-		<ion-input formControlName="username" placeholder="Username"></ion-input>
+    <ion-item>
+		<ion-label position="stacked">Age <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input formControlName="age" required type="number"></ion-input>
 	</ion-item>
-	<div class="invalid" *ngIf="!myForm.controls.username.valid  && (myForm.controls.username.dirty || submitAttempt)">
-        <p>Please enter a valid username.</p>
+	<div class="invalid" *ngIf="!myForm.controls.age.valid  && (myForm.controls.age.dirty || submitAttempt)">
+        <p>Please enter a valid age.</p>
     </div>
 
 	<ion-item>
-		<ion-input type="password" formControlName="password" placeholder="Password" clear-input="true"></ion-input>
-	</ion-item>
-	<div class="invalid" *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)">
-        <p>Please enter a valid Password.</p>
-    </div> -->
-
-    <ion-item>
-		<ion-label position="stacked">Age <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input required type="number"></ion-input>
-	</ion-item>
-
-	<ion-item>
 		<ion-label position="stacked">Country <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input placeholder=""></ion-input>
+		<ion-select formControlName="country" required interface="popover" mode="ios">
+			<ion-select-option value="indian">India</ion-select-option>
+			<ion-select-option value="other">Other</ion-select-option>
+		</ion-select>
 	</ion-item>
+	<div class="invalid" *ngIf="!myForm.controls.country.valid  && (myForm.controls.country.dirty || submitAttempt)">
+        <p>Please select valid Country</p>
+    </div>
 
 	<ion-item>
 		<ion-label position="stacked">State <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input placeholder=""></ion-input>
+		<ion-input formControlName="state" required></ion-input>
 	</ion-item>
+	<div class="invalid" *ngIf="!myForm.controls.state.valid  && (myForm.controls.state.dirty || submitAttempt)">
+        <p>Please enter a valid State.</p>
+    </div>
 
 	<ion-item>
 		<ion-label position="stacked">City <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input placeholder=""></ion-input>
+		<ion-input formControlName="city" required></ion-input>
 	</ion-item>
+	<div class="invalid" *ngIf="!myForm.controls.city.valid  && (myForm.controls.city.dirty || submitAttempt)">
+        <p>Please enter a valid city.</p>
+    </div>
 
 	<ion-item>
 		<ion-label position="stacked">Sampraday <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input placeholder=""></ion-input>
+		<ion-input formControlName="sampraday" required></ion-input>
 	</ion-item>
+	<div class="invalid" *ngIf="!myForm.controls.sampraday.valid  && (myForm.controls.sampraday.dirty || submitAttempt)">
+        <p>Please enter a valid Sampraday.</p>
+    </div>
 
 	<ion-item>
 		<ion-label position="stacked">Qualification <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input placeholder=""></ion-input>
+		<ion-select formControlName="qualification" required interface="popover" mode="ios">
+			<ion-select-option value="No formal education">No formal education</ion-select-option>
+		    <ion-select-option value="Primary education">Primary education</ion-select-option>
+		    <ion-select-option value="Secondary education">Secondary education or high school</ion-select-option>
+		    <ion-select-option value="GED">GED</ion-select-option>
+		    <ion-select-option value="Vocational qualification">Vocational qualification</ion-select-option>
+		    <ion-select-option value="Bachelors degree">Bachelor's degree</ion-select-option>
+		    <ion-select-option value="Masters degree">Master's degree</ion-select-option>
+		    <ion-select-option value="Doctorate or higher">Doctorate or higher</ion-select-option>
+		</ion-select>
 	</ion-item>
+	<div class="invalid" *ngIf="!myForm.controls.qualification.valid  && (myForm.controls.qualification.dirty || submitAttempt)">
+        <p>Please enter a valid Qualification.</p>
+    </div>
 
 	<ion-item>
 		<ion-label position="stacked">Notes</ion-label>
-		<ion-textarea></ion-textarea>
+		<ion-textarea formControlName="note"></ion-textarea>
 	</ion-item>
 
     <div class="ion-padding">

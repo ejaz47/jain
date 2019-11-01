@@ -1,12 +1,17 @@
 
 <ion-content fullscreen>
 
-	<ion-fab vertical="top" horizontal="start" slot="fixed" class="close-button">
-    <ion-fab-button color="danger">
+	<ion-fab vertical="top" horizontal="start" slot="fixed" class="close-button" [hidden]="hideBack">
+    <ion-fab-button color="danger" (click)="goback()">
       <ion-icon name="arrow-round-back"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   <ion-slides [options]="slideOpts" #slider>
+    <ion-slide>
+        <div class="q-div" style="height: 100%">
+          <ion-button size="large" fill="outline" color="light" (click)="gmailClick()">Login With Gmail</ion-button>
+        </div>
+    </ion-slide>
   	<ion-slide>
     	<div class="q-div z-depth-1">
 	    	<iframe width="100%" height="100%" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" [src]="data.videoUrl" frameborder="0" allowfullscreen></iframe>
@@ -22,9 +27,11 @@
     </ion-slide>
     
     <ion-slide>
-    	<div class="q-div z-depth-4">
-    		<login-form style="width: 100%" (onsubmit)="onLogin($event)"></login-form>
-    	</div>
+      <ion-content fullscreen>
+      	<div class="q-div">
+      		<login-form style="width: 100%" (onsubmit)="onLogin($event)"></login-form>
+      	</div>
+      </ion-content>
     </ion-slide>
   </ion-slides>
 

@@ -17,16 +17,39 @@ export class LoginFormComponent implements OnInit {
 	ngOnInit() {
 		
 		this.myForm = this.fb.group({
-			username: ['', [
+			age: ['', [
 				Validators.required,
 				Validators.maxLength(255)
 			]],
-			password: ['', [
+			country: ['', [
 				Validators.required,
-				Validators.maxLength(50)
-			]]
+				Validators.maxLength(255)
+			]],
+			state: ['', [
+				Validators.required,
+				Validators.maxLength(255)
+			]],
+			city: ['', [
+				Validators.required,
+				Validators.maxLength(255)
+			]],
+			sampraday: ['', [
+				Validators.required,
+				Validators.maxLength(255)
+			]],
+			qualification: ['', [
+				Validators.required,
+				Validators.maxLength(255)
+			]],
+			note: ['', []],
 	    });
 	}
+
+
+
+
+
+
 
 	onSubmit() {
 		this.submitAttempt = true;

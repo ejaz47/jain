@@ -7,20 +7,27 @@ import { Platform } from '@ionic/angular';
 export class AudioService {
 
 	playingStatus: any = {};
+	foreground: boolean = true;
 
   constructor(public platform: Platform) { 
-		this.platform.pause.subscribe(() => {
-			this.slideBgAudio.pause();
-		});
 
-		this.platform.resume.subscribe(() => {
+  	document.addEventListener("pause", () => {
+  		this.foreground = false;
+  		console.log('cordova paused');
+			this.slideBgAudio.pause();
+			this.mainBgAudio.pause();
+  	}, false);
+
+		document.addEventListener("resume", () => {
+  		this.foreground = true;
 			if(this.playingStatus['slide_bg']){
-				this.slideBgAudio.play();
+				this.playSlideBg();
+			}else if(this.playingStatus['main_bg']){
+				this.playMainBg();
 			}
-			if(this.playingStatus['main_bg']){
-				this.slideBgAudio.play();
-			}
-		});
+			console.log('app resumed');
+		}, false);
+
   }
 
   slideBgAudio: any =  new Audio("assets/audio/slide_bg.mp3");
@@ -30,11 +37,17 @@ export class AudioService {
 	completeAudio: any =  "assets/audio/complete.mp3";
 
 	playSlideBg(){
-		this.slideBgAudio.loop = true;
-  	this.slideBgAudio.volume = 0.2;
-    this.slideBgAudio.play();
-    this.playingStatus['slide_bg'] = true;
-    console.log(this.playingStatus);
+		if(this.foreground){
+			setTimeout(() => {
+				this.slideBgAudio.loop = true;
+		  	this.slideBgAudio.volume = 0.2;
+		    this.slideBgAudio.play();
+		    this.playingStatus['slide_bg'] = true;
+		    console.log(this.playingStatus);
+			}, 500);
+		}else{
+			this.playingStatus['slide_bg'] = true;
+		}
 	}
 
 	stopSlideBg(){
@@ -44,11 +57,17 @@ export class AudioService {
 	}
 
 	playMainBg(){
-		this.mainBgAudio.loop = true;
-  	this.mainBgAudio.volume = 0.2;
-    this.mainBgAudio.play();
-    this.playingStatus['main_bg'] = true;
-    console.log(this.playingStatus);
+		if(this.foreground){
+			setTimeout(() => {
+				this.mainBgAudio.loop = true;
+				this.mainBgAudio.volume = 0.2;
+			  this.mainBgAudio.play();
+			  this.playingStatus['main_bg'] = true;
+			  console.log(this.playingStatus);
+			});
+		}else{
+		  this.playingStatus['main_bg'] = true;
+		}
 	}
 
 	stopMainBg(){

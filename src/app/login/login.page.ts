@@ -111,15 +111,15 @@ export class LoginPage implements OnInit {
         // save token
         if(data.success){
           this.myForm.myForm.setValue({
-            age: parseInt(data.data.age) || 0,
-            gender: data.data.gender,
-            country: data.data.country,
-            state: data.data.state,
-            city: data.data.city,
-            contact: data.data.contact,
-            sampraday: data.data.sampraday,
-            qualification: data.data.qualification,
-            note: data.data.note
+            age: parseInt(data.data.age) || '',
+            gender: data.data.gender || '',
+            country: data.data.country || '',
+            state: data.data.state || '',
+            city: data.data.city || '',
+            contact: data.data.contact || '',
+            sampraday: data.data.sampraday || '',
+            qualification: data.data.qualification || '',
+            note: data.data.note || ''
           });
           this.storage.set('userData', data.data).then(() => {
             this.storage.set('token', data.token).then(() => {

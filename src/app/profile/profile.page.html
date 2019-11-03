@@ -1,23 +1,26 @@
 
 <ion-content fullscreen>
+<!-- 	<div class="version" [hidden]="!dataVersion">
+		<small>version {{dataVersion}}</small>
+	</div> -->
 	<div class="q-div">
 		<div style="font-size: 2rem; color: #fff; font-weight: 800;" class="ion-padding">
 			Jainism Survey
 		</div>
-		<div class="avatar-wrap z-depth-4">
+		<div class="avatar-wrap z-depth-4" [hidden]="!userProfile.givenName">
 			<!-- <ion-avatar class="z-depth-4 avatar">
 			  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
 			</ion-avatar> -->
 			<ion-text class="ion-padding">
-				<h2 style="color: #fff">Ejaz Ansari</h2>
+				<h2 style="color: #fff">{{userProfile.givenName}} {{userProfile.familyName}}</h2>
 				<h5 style="color: #fff; text-align: center;">
 					<ion-icon name="star" style="color: gold"></ion-icon>{{completedCount}} stars
 				</h5>
 			</ion-text>
 		</div>
-		<div class="ion-padding">
+		<div class="ion-padding" [hidden]="!userProfile.givenName">
 			<ion-button size="large" color="dark" (click)="gotoCategory()" class="hvr-pulse-grow">
-				Get More
+				Start Survey
 				<ion-icon name="star" style="color: gold"></ion-icon>
 			</ion-button>
 		</div>
@@ -30,7 +33,7 @@
 			</select>
 		</div>
 		<div class="logout">
-			<ion-button size="small" color="light" fill="clear">
+			<ion-button size="small" color="light" fill="clear" (click)="logout()">
 				<ion-icon name="power"></ion-icon>
 				Logout
 			</ion-button>

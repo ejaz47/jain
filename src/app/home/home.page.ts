@@ -258,7 +258,7 @@ export class HomePage {
 	  		}
 	    	que[c_id] = ansArray;
 	    	this.storage.set('queue', que).then(() => {});
-  	    setTimeout(() => {
+	  	    setTimeout(() => {
 		    	this.close();
 		    	modal.dismiss();
 		    }, 3000);

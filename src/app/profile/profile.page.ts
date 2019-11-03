@@ -14,7 +14,9 @@ export class ProfilePage implements OnInit {
   selectedLang: any;
   completedCount: any;
   totalCount: any;
-
+  userProfile: any = {};
+  dataVersion: any;
+  
   constructor(private storage: Storage,
   						private loadingCtrl: LoadingController,
   						private navCtrl: NavController,
@@ -27,8 +29,18 @@ export class ProfilePage implements OnInit {
 	  	this.checkUpdate().then(() => {
         //  update available
 		  	this.updateNow().then((database) => {
+          this.storage.set('currentVersion', database.versions).then(() => {
+            this.dataVersion = database.versions;
+          });
+
+          // set username
+          this.storage.get('gmailData').then((gdata) => {
+            this.userProfile = gdata;
+          });
+
           this.database = database;
           this.setup();
+
 		  	});
 	  	}).catch((database) => {
         // up to date
@@ -41,14 +53,28 @@ export class ProfilePage implements OnInit {
   	});
   }
 
-  setup(){
-    this.storage.get('language').then((lang) => {
-      this.available_languages = Object.keys(this.database);
-      this.selectedLang = lang || this.available_languages[0];
-    });
+  ionViewWillEnter(){
 
-    this.completedCount = Object.keys(this.database['answers']).length || 0;
-    this.totalCount = this.database['english']['categories'].length || 0;
+    if(this.database){
+      this.storage.get('database').then((database) => {
+        this.database = database;
+        this.setup();
+      })
+    }
+  }
+
+  setup(){
+    console.log('setup called');
+    this.api.syncAnswersInBackground().then(res => {});
+    this.storage.get('language').then((lang) => {
+      this.available_languages = Object.keys(this.database).filter(item => {
+        return (item != 'answers' && item != 'versions') ? item : false
+      });
+      this.selectedLang = lang || this.available_languages[0];
+
+      this.completedCount = Object.keys(this.database['answers']).length || 0;
+      this.totalCount = this.database[this.available_languages[0]]['categories'].length || 0;
+    });
   }
 
   gotoCategory(){
@@ -71,27 +97,33 @@ export class ProfilePage implements OnInit {
   	return new Promise((resolve, reject) => {
   		this.storage.get('currentVersion').then((version) => {
   			this.api.checkUpdate({version: version || 0}).subscribe((resp) => {
-  				if(resp.isAvailable){
-  					this.storage.set('currentVersion', parseInt(resp.version)).then(() => {
-  						resolve();
-  					});
+          console.log(resp);
+  				if(resp.message == 'Update Available' || true){
+						resolve();
   				}else{
             this.storage.get('database').then((database) => {
               reject(database);
             })
   				}
 			    loading.dismiss();
-  			})
+  			}, err => {
+          // alert('eeeeee');
+          this.storage.get('database').then((database) => {
+            reject(database);
+          })
+          loading.dismiss();
+        });
   		})
   	});
   }
 
   async checkLogin(): Promise<any>{
   	return new Promise((resolve, reject) => {
-  		this.storage.get('gmailData').then((gdata) => {
-  			if(!gdata){
+  		this.storage.get('token').then((token) => {
+  			if(!token){
   				reject(false);
   			}else{
+          this.api.updateHttpOptions(token);
   				resolve(true);
   			}
   		})
@@ -108,11 +140,29 @@ export class ProfilePage implements OnInit {
   	return new Promise((resolve, reject) => {
   		this.api.getDatabase().subscribe((resp) => {
   			console.log(resp);
+        // resp.answers = {};
         this.storage.set('database', resp).then(() => {
           resolve(resp);
           loading.dismiss();
         });
   		});
   	});
+  }
+
+  async logout(){
+    const loading = await this.loadingCtrl.create({
+      mode: 'ios',
+      message: 'Wait...'
+    });
+
+    loading.present();
+    setTimeout(() => {
+      this.api.logout().then(res => {
+        loading.dismiss();
+        if(res){
+          this.navCtrl.navigateRoot('/login');
+        }
+      });
+    },2000);
   }
 }

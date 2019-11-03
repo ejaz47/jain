@@ -14,6 +14,19 @@
 	    --border-color: #fff;
 	    --highlight-color-focused: #fff;
 	    --color-activated: #fff;
+        margin-top: 20px;
 	}
 
+}
+
+.note-block{
+	text-align: left;
+	color: #fff;
+	small{
+		color: #fff;
+	}
+
+	li{
+		list-style-type: decimal;		
+	}
 }

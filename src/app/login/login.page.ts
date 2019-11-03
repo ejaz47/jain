@@ -5,7 +5,7 @@ import { ApiService } from '../services/api.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-
+import { LoginFormComponent } from './form/form.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -14,7 +14,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 export class LoginPage implements OnInit {
 
 	data: any = {};
-	@ViewChild('slider', {static: false}) slider: IonSlides;
+  @ViewChild('slider', {static: false}) slider: IonSlides;
+	@ViewChild('myform', {static: false}) myForm: LoginFormComponent;
 
 	slideOpts = {
 		slidesPerView: 1,
@@ -55,7 +56,7 @@ export class LoginPage implements OnInit {
         console.log(data);
         this.api.sendUserData(data).subscribe((resp) => {
           loading.dismiss();
-          if(resp.success){
+          if(resp.Success || resp.success){
             this.navCtrl.navigateRoot('/profile');
           }
         });
@@ -75,7 +76,17 @@ export class LoginPage implements OnInit {
     loading.present();
 
     if(!window.cordova){
-      this.getData(loading, {email: 'ejaz.portal@gmail.com'});
+      // mock sample data
+      let gdata = {
+        displayName: "Ejaz Ansari",
+        email: "ejaz.portal@gmail.com",
+        expires: 1572786573,
+        expires_in: 3576,
+        familyName: "Ansari",
+        givenName: "Ejaz",
+        imageUrl: ''
+      }
+      this.getData(loading, gdata);
       return true;
     }
 
@@ -83,6 +94,7 @@ export class LoginPage implements OnInit {
       'webClientId': '641509421493-soqs963bk4ed3fiau4onnoqlbdl926s0.apps.googleusercontent.com',
       'offline': true
     }).then( res => {
+      console.log(res);
       this.getData(loading, res);
     })
     .catch(err => {
@@ -96,11 +108,22 @@ export class LoginPage implements OnInit {
     this.api.getUserDetails({ email: gmailData.email })
     .subscribe((data) => {
         console.log(data);
-
         // save token
         if(data.success){
+          this.myForm.myForm.setValue({
+            age: parseInt(data.data.age) || 0,
+            gender: data.data.gender,
+            country: data.data.country,
+            state: data.data.state,
+            city: data.data.city,
+            contact: data.data.contact,
+            sampraday: data.data.sampraday,
+            qualification: data.data.qualification,
+            note: data.data.note
+          });
           this.storage.set('userData', data.data).then(() => {
             this.storage.set('token', data.token).then(() => {
+              this.api.updateHttpOptions(data.token);
               this.storage.set('gmailData', gmailData).then(() => {
                 
                 this.storage.set('disclaimer', 

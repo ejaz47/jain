@@ -8,9 +8,17 @@
         <p>Please enter a valid age.</p>
     </div>
 
+    <ion-item>
+		<ion-label position="stacked">Gender <ion-text color="danger">*</ion-text></ion-label>
+		<ion-select formControlName="gender" required interface="popover" mode="ios">
+			<ion-select-option value="male">Male</ion-select-option>
+			<ion-select-option value="female">Female</ion-select-option>
+		</ion-select>
+	</ion-item>
+
 	<ion-item>
 		<ion-label position="stacked">Country <ion-text color="danger">*</ion-text></ion-label>
-		<ion-select formControlName="country" required interface="alert" mode="ios">
+		<ion-select formControlName="country" required interface="popover" mode="ios">
 			<ion-select-option value="indian">India</ion-select-option>
 			<ion-select-option value="other">Other</ion-select-option>
 		</ion-select>
@@ -35,13 +43,21 @@
         <p>Please enter a valid city.</p>
     </div>
 
+    <ion-item>
+		<ion-label position="stacked">Contact no. <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input formControlName="contact" required type="text"></ion-input>
+	</ion-item>
+	<div class="invalid" *ngIf="!myForm.controls.contact.valid  && (myForm.controls.contact.dirty || submitAttempt)">
+        <p>Please enter a valid contact no.</p>
+    </div>
+
 	<ion-item>
-		<ion-label position="stacked">Sampraday <ion-text color="danger">*</ion-text></ion-label>
-		<ion-select formControlName="sampraday" required interface="alert" mode="ios">
-			<ion-select-option value="Swetambar murtipujak">Swetambar murtipujak</ion-select-option>
-			<ion-select-option value="Stanakvasi">Stanakvasi</ion-select-option>
+		<ion-label position="stacked">Sampradaay <ion-text color="danger">*</ion-text></ion-label>
+		<ion-select formControlName="sampraday" required interface="popover" mode="ios">
+			<ion-select-option value="Swetamber">Swetamber</ion-select-option>
+			<ion-select-option value="StanakVasi">StanakVasi</ion-select-option>
 			<ion-select-option value="Digamber">Digamber</ion-select-option>
-			<ion-select-option value="Terapanti">Terapanti</ion-select-option>
+			<ion-select-option value="Terapant">Terapant</ion-select-option>
 		</ion-select>
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.sampraday.valid  && (myForm.controls.sampraday.dirty || submitAttempt)">
@@ -50,7 +66,7 @@
 
 	<ion-item>
 		<ion-label position="stacked">Qualification <ion-text color="danger">*</ion-text></ion-label>
-		<ion-select formControlName="qualification" required interface="alert" mode="ios">
+		<ion-select formControlName="qualification" required interface="popover" mode="ios">
 			<ion-select-option value="No formal education">No formal education</ion-select-option>
 		    <ion-select-option value="Primary education">Primary education</ion-select-option>
 		    <ion-select-option value="Secondary education">Secondary education or high school</ion-select-option>
@@ -66,10 +82,18 @@
     </div>
 
 	<ion-item>
-		<ion-label position="stacked">Notes</ion-label>
+		<ion-label position="stacked">Source of inspiration:</ion-label>
 		<ion-textarea formControlName="note"></ion-textarea>
 	</ion-item>
 
+	<div class="ion-padding note-block">
+		<h6>Note.</h6>
+		<small>
+			<li>You need not mention your name in the questionnaire.</li>
+			<li>This survey is being conducted to ascertain the current status of jainism and to solve the problems faced by mass public.</li>
+			<li>Take initiative to give your views and suggestions whole heartedly with utmost good faith.</li>
+		</small>
+	</div>
     <div class="ion-padding">
 	    <ion-button  color="primary" (click)="onSubmit()">Continue</ion-button>
 	</div>

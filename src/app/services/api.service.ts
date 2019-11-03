@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ApiService{
 	// API path
   base_path = 'http://softwarecompaniesinmumbai.com/jain_api/public/api/';
  
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storage: Storage) { }
   token: any;
   
   // Http Options
@@ -20,6 +21,16 @@ export class ApiService{
     })
   }
  
+  updateHttpOptions(token){
+    this.token = token;
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token
+      })
+    }
+  }
+
   // Handle API errors
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -47,78 +58,83 @@ export class ApiService{
         retry(2),
         catchError(this.handleError)
       )
-    // return new Observable((observer) => {
-    // 	setTimeout(() => {
-    // 		if(params.gmail_id == 'ejaz.portal@gmail.com'){
-		  //   	observer.next({
-		  //   		success: true,
-		  //   		data: {
-		  //   			token: 'bdgsjj38234bscd$$5k3333$###',
-		  //   			age: 26,
-		  //   			country: 'India',
-				// 			state: 'Maharashtra',
-				// 			city: 'Mumbai',
-				// 			sampraday: '',
-				// 			qualification: '',
-				// 			gmail: 'ejaz.portal@gmail.com'
-		  //   		}
-		  //   	});
-    // 		}else{
-    // 			observer.next({
-		  //   		success: true,
-		  //   		data: {
-		  //   			token: 'bdgsjj38234bscd$$5k3333$###',
-		  //   			age: '',
-		  //   			country: '',
-				// 			state: '',
-				// 			city: '',
-				// 			sampraday: '',
-				// 			qualification: '',
-				// 			gmail: params.gmail_id
-		  //   		}
-		  //   	});
-    // 		}
-	   //  	observer.complete();
-    // 	}, 2000);
-    // });
   }
 
   sendUserData(params): Observable<any>{
-    // return this.http
-    //   .post(this.base_path + '/user_data', params, this.httpOptions)
-    //   .pipe(
-    //     retry(2),
-    //     catchError(this.handleError)
-    //   )
-    return new Observable((observer) => {
-    	setTimeout(() => {
-	    	observer.next({
-	    		success: true,
-	    		data: {}
-	    	});
-	    	observer.complete();
-    	}, 2000);
-    });
-  }
-
-  checkUpdate(params): Observable<any>{
-    return new Observable((observer) => {
-      setTimeout(() => {
-        observer.next({
-          isAvailable: params.version < 1 ? true : false,
-          version: 1
-        });
-        observer.complete();
-      }, 1000);
-    });
-  }
-
-  getDatabase(): Observable<any>{
     return this.http
-      .get('assets/jain.json')
+      .post(this.base_path + 'update-user', params, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
+  }
+
+  checkUpdate(params): Observable<any>{
+    return this.http
+      .post(this.base_path + 'check-version', params, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  getDatabase(): Observable<any>{
+    return this.http
+      .post(this.base_path + 'get-master', {}, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  postAnswers(params): Observable<any>{
+    this.syncInProgress = true;
+    return this.http
+      .post(this.base_path + 'add-answer', JSON.stringify(params), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  syncInProgress: boolean;
+
+  syncAnswersInBackground(): Promise<any>{
+    return new Promise((resolve, reject) => {
+    if(!this.syncInProgress){
+      this.storage.get('queue').then(que => {
+        if(que){
+          this.postAnswers({answers: que}).subscribe((resp) => {
+            if(resp.success){
+              this.storage.set('queue', null).then(que => {
+                resolve(true);
+              });
+            }else{
+              resolve(false);
+            }
+
+            this.syncInProgress = false;
+          }, err => {
+            resolve(false);
+            this.syncInProgress = false;
+          }); //subscribe end
+        }else{
+          resolve(true);
+        }
+      });
+    }else{
+      resolve(false);
+    }
+    });
+  }
+
+  logout(): Promise<any>{
+    return new Promise((resolve, reject) => {
+      this.storage.clear().then(() => {
+        resolve(true);
+      }, err => {
+        resolve(false);
+      })
+    });
   }
 }

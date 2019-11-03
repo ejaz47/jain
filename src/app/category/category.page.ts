@@ -19,7 +19,6 @@ export class CategoryPage implements OnInit {
   						private api: ApiService) { }
 
   ngOnInit() {
-
     this.storage.get('database').then((database) => {
       this.storage.get('language').then((language) => {
         this.categories = database[language || "english"]['categories'];
@@ -27,10 +26,14 @@ export class CategoryPage implements OnInit {
         this.answers = database['answers'];
       });
     });
+  }
 
-    // setTimeout(() => {
-    //   this.answers[3] = true;
-    // }, 2000);
+  ionViewWillEnter(){
+    if(this.categories){
+      this.storage.get('database').then((database) => {
+        this.answers = database['answers'];
+      });
+    }
   }
 
   goback(){

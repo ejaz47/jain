@@ -21,6 +21,10 @@ export class LoginFormComponent implements OnInit {
 				Validators.required,
 				Validators.maxLength(255)
 			]],
+			gender: ['', [
+				Validators.required,
+				Validators.maxLength(15)
+			]],
 			country: ['', [
 				Validators.required,
 				Validators.maxLength(255)
@@ -32,6 +36,10 @@ export class LoginFormComponent implements OnInit {
 			city: ['', [
 				Validators.required,
 				Validators.maxLength(255)
+			]],
+			contact: ['', [
+				Validators.required,
+				Validators.maxLength(15)
 			]],
 			sampraday: ['', [
 				Validators.required,

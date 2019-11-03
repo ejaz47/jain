@@ -4,6 +4,7 @@ import { IonSlides, LoadingController, NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-	data: any;
+	data: any = {};
 	@ViewChild('slider', {static: false}) slider: IonSlides;
 
 	slideOpts = {
@@ -24,16 +25,12 @@ export class LoginPage implements OnInit {
               private loadingCtrl: LoadingController, 
               private api: ApiService, 
               private storage: Storage,
+              private googlePlus: GooglePlus,
               private navCtrl: NavController) { 
 
   }
 
   ngOnInit() {
-    // get data from server
-  	this.data = {
-  		videoUrl: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/w6vhJhv4fps'),
-  		text: 'A cookie associated with a cross-site resource at A cookie associated with a cross-site resource at A cookie associated with a cross-site resource at A cookie associated with a cross-site resource at A cookie associated with a cross-site resource at A cookie associated with a cross-site resource at A cookie associated with a cross-site resource at http://doubleclick.net/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application'
-  	}
   }
 
   next(){
@@ -59,7 +56,7 @@ export class LoginPage implements OnInit {
         this.api.sendUserData(data).subscribe((resp) => {
           loading.dismiss();
           if(resp.success){
-            this.navCtrl.navigateRoot('/category');
+            this.navCtrl.navigateRoot('/profile');
           }
         });
       })
@@ -76,19 +73,61 @@ export class LoginPage implements OnInit {
       message: 'Getting...'
     });
     loading.present();
-    this.api.getUserDetails({ gmail_id: 'ejaz.portal@gmail.com'})
-      .subscribe((data) => {
+
+    if(!window.cordova){
+      this.getData(loading, {email: 'ejaz.portal@gmail.com'});
+      return true;
+    }
+
+    this.googlePlus.login({
+      'webClientId': '641509421493-soqs963bk4ed3fiau4onnoqlbdl926s0.apps.googleusercontent.com',
+      'offline': true
+    }).then( res => {
+      this.getData(loading, res);
+    })
+    .catch(err => {
+      console.log(err);
+      alert('Please Allow us and Make sure internet connection is on!');
+      loading.dismiss();
+    });
+  }
+
+  getData(loading, gmailData){
+    this.api.getUserDetails({ email: gmailData.email })
+    .subscribe((data) => {
         console.log(data);
-        loading.dismiss();
 
         // save token
-        if(data.data.token){
-          this.storage.set('gmailData', data.data);
+        if(data.success){
+          this.storage.set('userData', data.data).then(() => {
+            this.storage.set('token', data.token).then(() => {
+              this.storage.set('gmailData', gmailData).then(() => {
+                
+                this.storage.set('disclaimer', 
+                {
+                    video: data.video, 
+                    text: data.disclaimer
+                })
+                .then(() => {
+                  loading.dismiss();
+                });
+
+              });
+            });  
+          });
         }
+
+        // get data from server
+        this.data = {
+          videoUrl: this.sanitizer.bypassSecurityTrustResourceUrl(data.video),
+          text: data.disclaimer
+        };
 
         // and move forward
         this.next();
-    })
-
+    }, (error) => {
+      alert('Make sure internet connection is on!');
+      loading.dismiss();
+    });
   }
 }

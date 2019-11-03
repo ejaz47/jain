@@ -1,5 +1,7 @@
 {
   "name": "jain",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

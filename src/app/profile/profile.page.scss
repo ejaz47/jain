@@ -1,0 +1,95 @@
+.q-div{
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	width: 100%;
+	align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+    position: relative;
+    
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradientBG 15s ease infinite;
+
+	ion-content{
+		--background: transparent;
+	}
+
+	.avatar-wrap{
+		position: relative;
+	    background: rgba(0, 0, 0, 0.52);
+	    padding: 30px;
+	    border-radius: 35px;
+	    text-align: center;
+	}
+
+	.avatar{
+		position: absolute;
+		top: -30px;
+		margin: auto;
+		left: -25px;
+	}
+
+	.language-select{
+	    position: absolute;
+	    bottom: 7px;
+	    left: 7px;
+	    select{
+	    	text-transform: capitalize;
+	    }
+	}
+
+	.logout{
+	    position: absolute;
+	    bottom: 0px;
+	    right: 0px;
+	}
+}
+
+
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+@-webkit-keyframes hvr-pulse-grow {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+@keyframes hvr-pulse-grow {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+.hvr-pulse-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-pulse-grow{
+  -webkit-animation-name: hvr-pulse-grow;
+  animation-name: hvr-pulse-grow;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+}
+

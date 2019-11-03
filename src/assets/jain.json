@@ -1,0 +1,337 @@
+{
+	"english": {
+		"categories": [
+			{
+				"id": "1",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			},
+			{
+				"id": "2",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			},
+			{
+				"id": "3",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			},
+			{
+				"id": "4",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			},
+			{
+				"id": "5",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			}
+		],
+
+		"questions": {
+			"1" : [
+				{
+					"id": "1",
+					"category_id": "1",
+					"text": "What is your name from birth?",
+					"maxSelect": 2,
+					"minSelect": 1,
+					"options": [
+						{
+							"id": "1",
+							"tag": "A",
+							"text": "Card Button Item 2 jumps A"
+						},
+						{
+							"id": "2",
+							"tag": "B",
+							"text": "Card Button Item 2 jumps B"
+						},
+						{
+							"id": "3",
+							"tag": "C",
+							"text": "Card Button Item 2 jumps C"
+						},
+						{
+							"id": "4",
+							"tag": "D",
+							"text": "Card Button Item 2 jumps D"
+						}
+					]
+				},
+				{
+					"id": "2",
+					"category_id": "1",
+					"text": "Tell us somthing about your self?",
+					"maxSelect": 2,
+					"minSelect": 1,
+					"options": [
+						{
+							"id": "1",
+							"tag": "A",
+							"text": "Card Button Item 2 jumps A"
+						},
+						{
+							"id": "2",
+							"tag": "B",
+							"text": "Card Button Item 2 jumps B"
+						},
+						{
+							"id": "3",
+							"tag": "C",
+							"text": "Card Button Item 2 jumps C"
+						},
+						{
+							"id": "4",
+							"tag": "D",
+							"text": "Card Button Item 2 jumps D"
+						}
+					]
+				}
+			],
+			"2" : [
+				{
+					"id": "1",
+					"category_id": "2",
+					"text": "What is your name from birth?",
+					"maxSelect": 2,
+					"minSelect": 1,
+					"options": [
+						{
+							"id": "1",
+							"tag": "A",
+							"text": "Card Button Item 2 jumps A"
+						},
+						{
+							"id": "2",
+							"tag": "B",
+							"text": "Card Button Item 2 jumps B"
+						},
+						{
+							"id": "3",
+							"tag": "C",
+							"text": "Card Button Item 2 jumps C"
+						},
+						{
+							"id": "4",
+							"tag": "D",
+							"text": "Card Button Item 2 jumps D"
+						}
+					]
+				},
+				{
+					"id": "2",
+					"category_id": "2",
+					"text": "Tell us somthing about your self?",
+					"maxSelect": 2,
+					"minSelect": 1,
+					"options": [
+						{
+							"id": "1",
+							"tag": "A",
+							"text": "Card Button Item 2 jumps A"
+						},
+						{
+							"id": "2",
+							"tag": "B",
+							"text": "Card Button Item 2 jumps B"
+						},
+						{
+							"id": "3",
+							"tag": "C",
+							"text": "Card Button Item 2 jumps C"
+						},
+						{
+							"id": "4",
+							"tag": "D",
+							"text": "Card Button Item 2 jumps D"
+						}
+					]
+				}
+			]
+		}
+	},
+	"hindi": {
+		"categories": [
+			{
+				"id": "1",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			},
+			{
+				"id": "2",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			},
+			{
+				"id": "3",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			},
+			{
+				"id": "4",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			},
+			{
+				"id": "5",
+				"name": "Personal",
+				"image": "https://i.pinimg.com/originals/71/02/6c/71026c1cd914119eeca36a1992a8b05d.jpg"
+			}
+		],
+
+		"questions": {
+			"1" : [
+				{
+					"id": "1",
+					"category_id": "1",
+					"text": "What is your name from birth?",
+					"maxSelect": 2,
+					"minSelect": 1,
+					"options": [
+						{
+							"id": "1",
+							"tag": "A",
+							"text": "Card Button Item 2 jumps A"
+						},
+						{
+							"id": "2",
+							"tag": "B",
+							"text": "Card Button Item 2 jumps B"
+						},
+						{
+							"id": "3",
+							"tag": "C",
+							"text": "Card Button Item 2 jumps C"
+						},
+						{
+							"id": "4",
+							"tag": "D",
+							"text": "Card Button Item 2 jumps D"
+						}
+					]
+				},
+				{
+					"id": "2",
+					"category_id": "1",
+					"text": "Tell us somthing about your self?",
+					"maxSelect": 2,
+					"minSelect": 1,
+					"options": [
+						{
+							"id": "1",
+							"tag": "A",
+							"text": "Card Button Item 2 jumps A"
+						},
+						{
+							"id": "2",
+							"tag": "B",
+							"text": "Card Button Item 2 jumps B"
+						},
+						{
+							"id": "3",
+							"tag": "C",
+							"text": "Card Button Item 2 jumps C"
+						},
+						{
+							"id": "4",
+							"tag": "D",
+							"text": "Card Button Item 2 jumps D"
+						}
+					]
+				}
+			],
+			"2" : [
+				{
+					"id": "1",
+					"category_id": "2",
+					"text": "What is your name from birth?",
+					"maxSelect": 2,
+					"minSelect": 1,
+					"options": [
+						{
+							"id": "1",
+							"tag": "A",
+							"text": "Card Button Item 2 jumps A"
+						},
+						{
+							"id": "2",
+							"tag": "B",
+							"text": "Card Button Item 2 jumps B"
+						},
+						{
+							"id": "3",
+							"tag": "C",
+							"text": "Card Button Item 2 jumps C"
+						},
+						{
+							"id": "4",
+							"tag": "D",
+							"text": "Card Button Item 2 jumps D"
+						}
+					]
+				},
+				{
+					"id": "2",
+					"category_id": "2",
+					"text": "Tell us somthing about your self?",
+					"maxSelect": 2,
+					"minSelect": 1,
+					"options": [
+						{
+							"id": "1",
+							"tag": "A",
+							"text": "Card Button Item 2 jumps A"
+						},
+						{
+							"id": "2",
+							"tag": "B",
+							"text": "Card Button Item 2 jumps B"
+						},
+						{
+							"id": "3",
+							"tag": "C",
+							"text": "Card Button Item 2 jumps C"
+						},
+						{
+							"id": "4",
+							"tag": "D",
+							"text": "Card Button Item 2 jumps D"
+						}
+					]
+				}
+			]
+		}
+	},
+
+	"answers": {
+		"1": [
+			{
+				"c_id" : "1",
+				"q_id" : "1",
+				"answer": [
+					{
+						"id": "1"
+					},
+					{
+						"id": "2"
+					}
+				]
+			}
+		],
+		"2": [
+			{
+				"c_id" : "2",
+				"q_id" : "1",
+				"answer": [
+					{
+						"id": "1"
+					},
+					{
+						"id": "2"
+					}
+				]
+			}
+		]
+	}
+}

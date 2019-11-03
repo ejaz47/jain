@@ -12,10 +12,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
 		BrowserModule, 
 		IonicModule.forRoot(), 
@@ -27,6 +27,7 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
+    GooglePlus,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

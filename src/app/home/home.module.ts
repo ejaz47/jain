@@ -5,8 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { ThanksComponent } from './thanks/thanks.component';
+import { ThanksModule } from './thanks/thanks.module';
 
 @NgModule({
+  entryComponents: [ThanksComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -16,7 +19,8 @@ import { HomePage } from './home.page';
         path: '',
         component: HomePage
       }
-    ])
+    ]),
+    ThanksModule
   ],
   declarations: [HomePage]
 })

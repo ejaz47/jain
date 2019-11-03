@@ -10,7 +10,7 @@
 
 	<ion-item>
 		<ion-label position="stacked">Country <ion-text color="danger">*</ion-text></ion-label>
-		<ion-select formControlName="country" required interface="popover" mode="ios">
+		<ion-select formControlName="country" required interface="alert" mode="ios">
 			<ion-select-option value="indian">India</ion-select-option>
 			<ion-select-option value="other">Other</ion-select-option>
 		</ion-select>
@@ -37,7 +37,12 @@
 
 	<ion-item>
 		<ion-label position="stacked">Sampraday <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input formControlName="sampraday" required></ion-input>
+		<ion-select formControlName="sampraday" required interface="alert" mode="ios">
+			<ion-select-option value="Swetambar murtipujak">Swetambar murtipujak</ion-select-option>
+			<ion-select-option value="Stanakvasi">Stanakvasi</ion-select-option>
+			<ion-select-option value="Digamber">Digamber</ion-select-option>
+			<ion-select-option value="Terapanti">Terapanti</ion-select-option>
+		</ion-select>
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.sampraday.valid  && (myForm.controls.sampraday.dirty || submitAttempt)">
         <p>Please enter a valid Sampraday.</p>
@@ -45,7 +50,7 @@
 
 	<ion-item>
 		<ion-label position="stacked">Qualification <ion-text color="danger">*</ion-text></ion-label>
-		<ion-select formControlName="qualification" required interface="popover" mode="ios">
+		<ion-select formControlName="qualification" required interface="alert" mode="ios">
 			<ion-select-option value="No formal education">No formal education</ion-select-option>
 		    <ion-select-option value="Primary education">Primary education</ion-select-option>
 		    <ion-select-option value="Secondary education">Secondary education or high school</ion-select-option>

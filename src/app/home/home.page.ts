@@ -6,6 +6,9 @@ import {
   animate,
   transition
 } from "@angular/animations";
+import { ToastController, NavController, AlertController, ModalController } from '@ionic/angular';
+import { ThanksComponent } from './thanks/thanks.component';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +34,7 @@ export class HomePage {
 
 	slideOpts = {
 		slidesPerView: 1,
+		touchRatio: 0,
 	  coverflowEffect: {
 	    rotate: 50,
 	    stretch: 0,
@@ -121,147 +125,33 @@ export class HomePage {
 	activeSlideIndex: any;
 	isValid: any = true;
 	selected = {};
-	quetions:any = [
-		{
-			id: '1',
-			text: "H1: The quick brown fox jumps over the lazy dog",
-			maxSelect: 2,
-			minSelect: 1,
-			options: [
-				{
-					id: '1',
-					tag: 'A',
-					text: 'Card Button Item 2 jumps A'
-				},
-				{
-					id: '2',
-					tag: 'B',
-					text: 'Card Button Item 2 jumps B'
-				},
-				{
-					id: '3',
-					tag: 'C',
-					text: 'Card Button Item 2 jumps C'
-				},
-				{
-					id: '4',
-					tag: 'D',
-					text: 'Card Button Item 2 jumps D'
-				},
-				{
-					id: '5',
-					tag: 'E',
-					text: 'Card Button Item 2 jumps D'
-				},
-				{
-					id: '6',
-					tag: 'F',
-					text: 'Card Button Item 2 jumps D'
-				},
-				{
-					id: '7',
-					tag: 'G',
-					text: 'Card Button Item 2 jumps D'
-				}
-			]
-		},
-		{
-			id: '2',
-			text: "H1: The quick brown fox jumps over the lazy dog",
-			maxSelect: 2,
-			minSelect: 1,
-			options: [
-				{
-					id: '1',
-					tag: 'A',
-					text: 'Card Button Item 2 jumps A'
-				},
-				{
-					id: '2',
-					tag: 'B',
-					text: 'Card Button Item 2 jumps B'
-				},
-				{
-					id: '3',
-					tag: 'C',
-					text: 'Card Button Item 2 jumps C'
-				},
-				{
-					id: '4',
-					tag: 'D',
-					text: 'Card Button Item 2 jumps D'
-				}
-			]
-		},
-		{
-			id: '3',
-			text: "H1: The quick brown fox jumps over the lazy dog",
-			maxSelect: 2,
-			minSelect: 1,
-			options: [
-				{
-					id: '1',
-					tag: 'A',
-					text: 'Card Button Item 2 jumps A'
-				},
-				{
-					id: '2',
-					tag: 'B',
-					text: 'Card Button Item 2 jumps B'
-				},
-				{
-					id: '3',
-					tag: 'C',
-					text: 'Card Button Item 2 jumps C'
-				},
-				{
-					id: '4',
-					tag: 'D',
-					text: 'Card Button Item 2 jumps D'
-				}
-			]
-		},
-		{
-			id: '4',
-			text: "H1: The quick brown fox jumps over the lazy dog",
-			maxSelect: 2,
-			minSelect: 1,
-			options: [
-				{
-					id: '1',
-					tag: 'A',
-					text: 'Card Button Item 2 jumps A'
-				},
-				{
-					id: '2',
-					tag: 'B',
-					text: 'Card Button Item 2 jumps B'
-				},
-				{
-					id: '3',
-					tag: 'C',
-					text: 'Card Button Item 2 jumps C'
-				},
-				{
-					id: '4',
-					tag: 'D',
-					text: 'Card Button Item 2 jumps D'
-				}
-			]
-		}
-	];
+	quetions:any;
 
 	bgAudio: any = new Audio("assets/audio/slide_bg.mp3");
 	swipeAudio: any = "assets/audio/question_swipe.mp3";
 	clickAudio: any = "assets/audio/click.mp3";
+	database: any;
+	currentQuestion: any;
 
-  constructor() {
+  constructor(public toastController: ToastController,
+  						private navCtrl: NavController,
+  						private storage: Storage,
+  						public modalController: ModalController,
+  						public alertController: AlertController) {
   	this.bgAudio.loop = true;
   	this.bgAudio.volume = 0.05;
     this.bgAudio.play();
+
+    this.initialize();
   }
   
-  itemClicked(quetion, option){
+  async initialize(){
+  	console.log(window['selectedCategory']);
+  	this.quetions = window['selectedCategory'];
+  	this.currentQuestion = 0;
+  }
+
+  async itemClicked(quetion, option){
   	console.log(this.selected);
   	if(!this.selected[quetion.id]){
 	  	this.selected[quetion.id] = [];
@@ -277,12 +167,6 @@ export class HomePage {
   		}
   	}
 
-  	if(this.selected[quetion.id].length >= quetion.minSelect){
-  		this.isValid = true;
-  	}else{
-
-  	}
-
   	let aud = new Audio(this.clickAudio);
   	aud.play();
   }
@@ -295,30 +179,91 @@ export class HomePage {
   }
 
 
-  next() {
+  async next() {
   	let aud = new Audio(this.swipeAudio);
   	aud.play();
-    this.slider.slideNext(500);
-    // this.slider.lockSwipeToNext(true);
-    this.isValid = false;
+
+    if(this.selected[this.quetions[this.currentQuestion].id].length >= this.quetions[this.currentQuestion].minSelect){
+	    this.slider.slideNext(500);
+	    if(this.currentQuestion >= this.quetions.length - 1){
+	    	this.finish();
+	    }else{
+		    this.currentQuestion++;
+	    }
+  	}else{
+  		const toast = await this.toastController.create({
+	      message: 'Please choose atleast ' + this.quetions[this.currentQuestion].minSelect + " choice.",
+	      duration: 2000,
+	      position: 'middle',
+	      mode: 'md'
+	    });
+	    toast.present();
+  	}
   }
 
   previous() {
   	let aud = new Audio(this.swipeAudio);
   	aud.play();
     this.slider.slidePrev(500);
+    this.currentQuestion--;
+    if(this.currentQuestion < 0){
+    	this.currentQuestion = 0;
+    }
   }
 
-  slideChanged(){
-  	// console.log(this.slider);
-  	this.slider.getActiveIndex().then((num) => {
-	  	console.log(num);
-	  	this.activeSlideIndex = num;
-	  });
+  close(){
+  	this.navCtrl.back();
   }
 
-  beforeNext(){
-  	// console.log(this.activeSlideIndex - 1);
-  }
+  async finish(){
+  	console.log('finish');
+  	// const alert = await this.alertController.create({
+   //    message: 'This is an alert message.',
+   //    buttons: ['ok'],
+   //    mode: 'ios'
+   //  });
 
+   //  await alert.present();
+    const modal = await this.modalController.create({
+      component: ThanksComponent
+    });
+    await modal.present();
+    console.log(this.quetions);
+    console.log(this.selected);
+
+    let ansArray = [];
+    let c_id = this.quetions[0].category_id;
+
+    for(let i=0; i < this.quetions.length; i++){
+    	let selectedAns = this.selected[this.quetions[i].id].map((item) => {
+    		return { id: item };
+    	});
+
+    	ansArray.push({
+    		c_id: c_id,
+    		q_id: this.quetions[i].id,
+    		answer: selectedAns
+    	});
+    }
+
+    console.log(ansArray);
+
+    this.storage.get('database').then(db => {
+    	db.answers[c_id] = ansArray;
+    	this.storage.set('database', db).then(() => {});
+
+	  	this.storage.get('queue').then(que => {
+	  		if(!que){
+	  			que = {};
+	  		}
+	    	que[c_id] = ansArray;
+	    	this.storage.set('queue', que).then(() => {});
+  	    setTimeout(() => {
+		    	this.close();
+		    	modal.dismiss();
+		    }, 3000);
+	    });
+    })
+
+  }
 }

@@ -8,10 +8,11 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class ApiService{
 	// API path
-  base_path = 'http://localhost:3000/category';
+  base_path = 'http://softwarecompaniesinmumbai.com/jain_api/public/api/';
  
   constructor(private http: HttpClient) { }
- 
+  token: any;
+  
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,7 +30,8 @@ export class ApiService{
       // The response body may contain clues as to what went wrong,
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: ${error.message}`);
+      console.log(error);
     }
     // return an observable with a user-facing error message
     return throwError(
@@ -39,46 +41,46 @@ export class ApiService{
  
   // Create a new item
   getUserDetails(params): Observable<any>{
-    // return this.http
-    //   .post(this.base_path + '/login_gmail', params, this.httpOptions)
-    //   .pipe(
-    //     retry(2),
-    //     catchError(this.handleError)
-    //   )
-    return new Observable((observer) => {
-    	setTimeout(() => {
-    		if(params.gmail_id == 'ejaz.portal@gmail.com'){
-		    	observer.next({
-		    		success: true,
-		    		data: {
-		    			token: 'bdgsjj38234bscd$$5k3333$###',
-		    			age: 26,
-		    			country: 'India',
-							state: 'Maharashtra',
-							city: 'Mumbai',
-							sampraday: '',
-							qualification: '',
-							gmail: 'ejaz.portal@gmail.com'
-		    		}
-		    	});
-    		}else{
-    			observer.next({
-		    		success: true,
-		    		data: {
-		    			token: 'bdgsjj38234bscd$$5k3333$###',
-		    			age: '',
-		    			country: '',
-							state: '',
-							city: '',
-							sampraday: '',
-							qualification: '',
-							gmail: params.gmail_id
-		    		}
-		    	});
-    		}
-	    	observer.complete();
-    	}, 2000);
-    });
+    return this.http
+      .post(this.base_path + 'user-login', params, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+    // return new Observable((observer) => {
+    // 	setTimeout(() => {
+    // 		if(params.gmail_id == 'ejaz.portal@gmail.com'){
+		  //   	observer.next({
+		  //   		success: true,
+		  //   		data: {
+		  //   			token: 'bdgsjj38234bscd$$5k3333$###',
+		  //   			age: 26,
+		  //   			country: 'India',
+				// 			state: 'Maharashtra',
+				// 			city: 'Mumbai',
+				// 			sampraday: '',
+				// 			qualification: '',
+				// 			gmail: 'ejaz.portal@gmail.com'
+		  //   		}
+		  //   	});
+    // 		}else{
+    // 			observer.next({
+		  //   		success: true,
+		  //   		data: {
+		  //   			token: 'bdgsjj38234bscd$$5k3333$###',
+		  //   			age: '',
+		  //   			country: '',
+				// 			state: '',
+				// 			city: '',
+				// 			sampraday: '',
+				// 			qualification: '',
+				// 			gmail: params.gmail_id
+		  //   		}
+		  //   	});
+    // 		}
+	   //  	observer.complete();
+    // 	}, 2000);
+    // });
   }
 
   sendUserData(params): Observable<any>{
@@ -99,4 +101,24 @@ export class ApiService{
     });
   }
 
+  checkUpdate(params): Observable<any>{
+    return new Observable((observer) => {
+      setTimeout(() => {
+        observer.next({
+          isAvailable: params.version < 1 ? true : false,
+          version: 1
+        });
+        observer.complete();
+      }, 1000);
+    });
+  }
+
+  getDatabase(): Observable<any>{
+    return this.http
+      .get('assets/jain.json')
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
 }

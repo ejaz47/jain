@@ -35,11 +35,6 @@ export class ProfilePage implements OnInit {
             this.dataVersion = database.versions;
           });
 
-          // set username
-          this.storage.get('gmailData').then((gdata) => {
-            this.userProfile = gdata;
-          });
-
           this.database = database;
           this.setup();
 
@@ -77,6 +72,10 @@ export class ProfilePage implements OnInit {
       this.totalCount = this.database[this.available_languages[0]]['categories'].length || 0;
       this.audio.getAudioStatus().then(status => {
         this.audoStatus = status;
+      });
+      // set username
+      this.storage.get('gmailData').then((gdata) => {
+        this.userProfile = gdata;
       });
     });
   }

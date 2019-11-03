@@ -9,6 +9,7 @@ import {
 import { ToastController, NavController, AlertController, ModalController } from '@ionic/angular';
 import { ThanksComponent } from './thanks/thanks.component';
 import { Storage } from '@ionic/storage';
+import { AudioService } from '../services/audio.service';
 
 @Component({
   selector: 'app-home',
@@ -127,24 +128,24 @@ export class HomePage {
 	selected = {};
 	quetions:any;
 
-	bgAudio: any = new Audio("assets/audio/slide_bg.mp3");
-	swipeAudio: any = "assets/audio/question_swipe.mp3";
-	clickAudio: any = "assets/audio/click.mp3";
 	database: any;
 	currentQuestion: any;
 
   constructor(public toastController: ToastController,
+  						public audio: AudioService,
   						private navCtrl: NavController,
   						private storage: Storage,
   						public modalController: ModalController,
   						public alertController: AlertController) {
-  	this.bgAudio.loop = true;
-  	this.bgAudio.volume = 0.05;
-    this.bgAudio.play();
 
     this.initialize();
   }
   
+  ionViewWillLeave(){
+    this.audio.stopSlideBg();
+    this.audio.playMainBg();
+  }
+
   async initialize(){
   	console.log(window['selectedCategory']);
   	this.quetions = window['selectedCategory'];
@@ -167,8 +168,7 @@ export class HomePage {
   		}
   	}
 
-  	let aud = new Audio(this.clickAudio);
-  	aud.play();
+  	this.audio.play('click');
   }
 
   isSelected(quetion, option){
@@ -180,8 +180,8 @@ export class HomePage {
 
 
   async next() {
-  	let aud = new Audio(this.swipeAudio);
-  	aud.play();
+
+  	this.audio.play('swipe');
 
     if(this.selected[this.quetions[this.currentQuestion].id].length >= this.quetions[this.currentQuestion].minSelect){
 	    this.slider.slideNext(500);
@@ -202,8 +202,7 @@ export class HomePage {
   }
 
   previous() {
-  	let aud = new Audio(this.swipeAudio);
-  	aud.play();
+  	this.audio.play('swipe');
     this.slider.slidePrev(500);
     this.currentQuestion--;
     if(this.currentQuestion < 0){
@@ -228,6 +227,9 @@ export class HomePage {
       component: ThanksComponent
     });
     await modal.present();
+    setTimeout(() => {
+    	this.audio.play('complete');
+    },500);
     console.log(this.quetions);
     console.log(this.selected);
 

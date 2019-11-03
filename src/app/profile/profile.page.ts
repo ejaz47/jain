@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ApiService } from '../services/api.service';
 import { IonSlides, LoadingController, NavController } from '@ionic/angular';
+import { AudioService } from '../services/audio.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,7 @@ export class ProfilePage implements OnInit {
   dataVersion: any;
   
   constructor(private storage: Storage,
+              public audio: AudioService,
   						private loadingCtrl: LoadingController,
   						private navCtrl: NavController,
   						private api: ApiService) { }
@@ -78,6 +80,7 @@ export class ProfilePage implements OnInit {
   }
 
   gotoCategory(){
+    this.audio.playMainBg();
     this.navCtrl.navigateForward('/category');
   }
 

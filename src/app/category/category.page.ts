@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ApiService } from '../services/api.service';
 import { NavController } from '@ionic/angular';
+import { AudioService } from '../services/audio.service';
 
 @Component({
   selector: 'app-category',
@@ -15,6 +16,7 @@ export class CategoryPage implements OnInit {
   questions: any;
 
   constructor(private storage: Storage,
+              public audio: AudioService,
   						private navCtrl: NavController,
   						private api: ApiService) { }
 
@@ -36,11 +38,17 @@ export class CategoryPage implements OnInit {
     }
   }
 
+  ionViewWillLeave(){
+    this.audio.stopMainBg();
+  }
+
   goback(){
   	this.navCtrl.back();
   }
 
   open(cate){
+    this.audio.play('click');
+    this.audio.playSlideBg();
     window['selectedCategory'] = this.questions[cate.id];
     this.navCtrl.navigateForward('/home');
   }

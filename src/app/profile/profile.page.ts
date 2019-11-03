@@ -17,7 +17,7 @@ export class ProfilePage implements OnInit {
   totalCount: any;
   userProfile: any = {};
   dataVersion: any;
-  
+  audoStatus: any;
   constructor(private storage: Storage,
               public audio: AudioService,
   						private loadingCtrl: LoadingController,
@@ -56,7 +56,6 @@ export class ProfilePage implements OnInit {
   }
 
   ionViewWillEnter(){
-
     if(this.database){
       this.storage.get('database').then((database) => {
         this.database = database;
@@ -76,6 +75,15 @@ export class ProfilePage implements OnInit {
 
       this.completedCount = Object.keys(this.database['answers']).length || 0;
       this.totalCount = this.database[this.available_languages[0]]['categories'].length || 0;
+      this.audio.getAudioStatus().then(status => {
+        this.audoStatus = status;
+      });
+    });
+  }
+
+  audioToggel(){
+    this.audio.toggelStatus().then(status => {
+      this.audoStatus = status;
     });
   }
 

@@ -38,5 +38,11 @@
 				Logout
 			</ion-button>
 		</div>
+		<div class="sound">
+			<ion-button size="large" color="light" shape="round" fill="clear" (click)="audioToggel()">
+				<ion-icon name="volume-off" [hidden]="audoStatus"></ion-icon>
+				<ion-icon name="volume-high" [hidden]="!audoStatus"></ion-icon>
+			</ion-button>
+		</div>
 	</div>
 </ion-content>

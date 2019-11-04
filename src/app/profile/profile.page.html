@@ -26,11 +26,21 @@
 		</div>
 
 		<div class="language-select">
-			<select (change)="updateLanguage(selectedLang)" [(ngModel)]="selectedLang">
+			<!-- <select (change)="updateLanguage(selectedLang)" [(ngModel)]="selectedLang">
 				<option value="{{lang}}" 
 						*ngFor="let lang of available_languages" 
 						[hidden]="lang == 'answers'">{{lang}}</option>
-			</select>
+			</select> -->
+			<ion-select 
+				style="color: #fff;"
+				interface="popover"
+				mode="ios" 
+				placeholder="Language" 
+				[(ngModel)]="selectedLang" 
+				(ionChange)="updateLanguage(selectedLang)">
+		      <ion-select-option *ngFor="let lang of available_languages"
+		      	value="{{lang}}">{{lang.toUpperCase()}}</ion-select-option>
+		    </ion-select>
 		</div>
 		<div class="logout">
 			<ion-button size="small" color="light" fill="clear" (click)="logout()">

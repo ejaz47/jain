@@ -38,6 +38,9 @@ export class AudioService {
   getAudioStatus(): Promise<any>{
   	return new Promise((resolve, reject) => {
   		this.storage.get('audioStatus').then(status => {
+	  			if(status == null || status == undefined){
+	  				status = true;	
+	  			}
   				resolve(status);
   				this.audioStatus = status;
    		});

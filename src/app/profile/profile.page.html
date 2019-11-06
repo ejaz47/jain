@@ -4,6 +4,7 @@
 		<small>version {{dataVersion}}</small>
 	</div> -->
 	<div class="q-div">
+
 		<div style="font-size: 2rem; color: #fff; font-weight: 800;" class="ion-padding">
 			Jainism Survey
 		</div>
@@ -14,14 +15,15 @@
 			<ion-text class="ion-padding">
 				<h2 style="color: #fff">{{userProfile.givenName}} {{userProfile.familyName}}</h2>
 				<h5 style="color: #fff; text-align: center;">
-					<ion-icon name="star" style="color: gold"></ion-icon>{{completedCount}} stars
+					{{completedCount}} Badges
+					<ion-icon name="ribbon" style="color: gold"></ion-icon>
 				</h5>
 			</ion-text>
 		</div>
 		<div class="ion-padding" [hidden]="!userProfile.givenName">
 			<ion-button size="large" color="dark" (click)="gotoCategory()" class="hvr-pulse-grow">
 				Start Survey
-				<ion-icon name="star" style="color: gold"></ion-icon>
+				<ion-icon name="ribbon" style="color: gold"></ion-icon>
 			</ion-button>
 		</div>
 

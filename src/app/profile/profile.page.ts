@@ -108,7 +108,7 @@ export class ProfilePage implements OnInit {
   		this.storage.get('currentVersion').then((version) => {
   			this.api.checkUpdate({version: version || 0}).subscribe((resp) => {
           console.log(resp);
-  				if(resp.message == 'Update Available' || true){
+  				if(resp.message == 'Update Available'){
 						resolve();
   				}else{
             this.storage.get('database').then((database) => {

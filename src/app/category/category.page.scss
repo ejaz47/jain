@@ -19,9 +19,12 @@
 	.cate-tile{
 	    background: #fff;
 	    margin: 20px;
-	    height: 25vh;
+	    height: 13em;
+	    display: -webkit-box;
 	    display: flex;
+	    -webkit-box-pack: center;
 	    justify-content: center;
+	    -webkit-box-align: center;
 	    align-items: center;
 	    border-radius: 10px;
 	    background-size: cover;
@@ -29,6 +32,7 @@
 	    position: relative;
 	    margin-bottom: 0px;
 	    border: 10px solid #FFC107;
+	    text-align: center;
 
 	    .bg{
 	    	position: absolute;
@@ -53,11 +57,13 @@
 	    }
 
 	    .star{
-	    	position: absolute;
-		    z-index: 2;
+	    	/*position: absolute;
 		    width: 100px;
-		    height: 100px;
-		    animation: starUp 0.5s ease-out;
+		    height: 68px;*/
+		    z-index: 2;
+	        margin: auto;
+		    position: absolute;
+		    /*animation: starUp 0.5s ease-out;*/
 	    }
 
 	    .star-blank{
@@ -66,6 +72,11 @@
 		    width: 100px;
 		    height: 100px;
 		    font-size: 100px;
+	    }
+
+	    .animate-badge{
+		    animation: starUp 0.5s ease-out;
+		    animation-delay: 4s;
 	    }
 	}
 

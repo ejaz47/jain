@@ -1,9 +1,22 @@
 <div class="q-div">
+	<div class="pyro">
+	    <div class="before"></div>
+	    <div class="after"></div>
+	</div>
 	<h1 style="color: #fff">
 		Congratulations!
 	</h1>
+	<div class="ion-padding mybadge hvr-pulse-grow">
+		<!-- <img src="assets/badge-icon.png" width="100%"> -->
+		<div class="badge {{category.badgeInfo.color}}">
+			<div class="circle">
+				<ion-icon name="{{category.badgeInfo.icon}}"></ion-icon>
+			</div>
+			<div class="ribbon">
+				{{category.badgeInfo.name}}
+			</div>
+		</div>
+	</div>
 	<h4 style="color: #fff">
-		You have earned 
-		<ion-icon name="star" style="color: gold"></ion-icon>
-		 1 star</h4>
+		You got a new badge.</h4>
 </div>

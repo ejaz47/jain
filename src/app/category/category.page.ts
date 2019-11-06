@@ -14,6 +14,7 @@ export class CategoryPage implements OnInit {
   categories: any;
   answers: any;
   questions: any;
+  clickedCat: any;
 
   constructor(private storage: Storage,
               public audio: AudioService,
@@ -26,6 +27,7 @@ export class CategoryPage implements OnInit {
         this.categories = database[language || "english"]['categories'];
         this.questions = database[language || "english"]['questions'];
         this.answers = database['answers'];
+        this.setBadgeInfo();
       });
     });
   }
@@ -42,6 +44,21 @@ export class CategoryPage implements OnInit {
     this.audio.stopMainBg();
   }
 
+  setBadgeInfo(){
+    this.categories = this.categories.map(cate => {
+      if(cate.badgeInfo){
+        return false;
+      }
+
+      cate.badgeInfo = {
+        color: 'purple',
+        icon: 'star',
+        name: cate.name || 'Primary'
+      }
+      return cate;
+    });
+  }
+
   goback(){
   	this.navCtrl.back();
   }
@@ -50,6 +67,8 @@ export class CategoryPage implements OnInit {
     this.audio.play('click');
     this.audio.playSlideBg();
     window['selectedCategory'] = this.questions[cate.id];
+    window['selectedCategoryInfo'] = cate;
     this.navCtrl.navigateForward('/home');
+    this.clickedCat = cate.id;
   }
 }

@@ -19,11 +19,26 @@
 						<div class="bg text">
 							{{cate.name}}
 						</div>
-						<div *ngIf="answers[cate.id] != undefined" class="star">
-							<img src="assets/star.png" width="100%">
+						<div *ngIf="answers[cate.id] != undefined" class="star" 
+							[ngClass]="clickedCat == cate.id ? 'animate-badge' : ''">
+							<!-- <img src="assets/badge-icon.png" width="100%"> -->
+							<div class="badge {{cate.badgeInfo.color}}">
+								<div class="circle">
+									<ion-icon name="{{cate.badgeInfo.icon}}"></ion-icon>
+								</div>
+								<div class="ribbon">
+									{{cate.badgeInfo.name}}
+								</div>
+							</div>
 						</div>
-						<div [hidden]="answers[cate.id]" class="star-blank">
-							<ion-icon name="star" style="color: #fff"></ion-icon>
+						<div [hidden]="answers[cate.id]" class="star floating">
+							<!-- <img src="assets/badge-icon.png" width="100%" style="filter: grayscale(1);"> -->
+							<div class="badge silver">
+								<div class="circle">
+									<ion-icon name="help"></ion-icon>
+								</div>
+								<div class="ribbon"> </div>
+							</div>
 						</div>
 						<div class="text"></div>
 					</div>

@@ -165,6 +165,9 @@ export class HomePage {
   	}else{
   		if(this.selected[quetion.id].length < quetion.maxSelect){
 		  	this.selected[quetion.id].push(option.id);
+  		}else if(quetion.maxSelect == 1){
+  			this.selected[quetion.id] = [];
+		  	this.selected[quetion.id].push(option.id);
   		}
   	}
 
@@ -180,7 +183,7 @@ export class HomePage {
 
 
   async next() {
-
+  	// this.finish(); return;
   	this.audio.play('swipe');
 
     if(this.selected[this.quetions[this.currentQuestion].id].length >= this.quetions[this.currentQuestion].minSelect){
@@ -224,7 +227,8 @@ export class HomePage {
 
    //  await alert.present();
     const modal = await this.modalController.create({
-      component: ThanksComponent
+      component: ThanksComponent,
+      cssClass: 'thanks-modal'
     });
     await modal.present();
     setTimeout(() => {
@@ -260,10 +264,10 @@ export class HomePage {
 	  		}
 	    	que[c_id] = ansArray;
 	    	this.storage.set('queue', que).then(() => {});
+	    	this.close();
 	  	    setTimeout(() => {
-		    	this.close();
 		    	modal.dismiss();
-		    }, 3000);
+		    }, 3500);
 	    });
     })
 

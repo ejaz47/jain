@@ -8,9 +8,13 @@ import { ModalController } from '@ionic/angular';
 })
 export class ThanksComponent implements OnInit {
 
+  category: any;
+
   constructor(public modalCtrl: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.category = window['selectedCategoryInfo'];
+  }
 
   close(){
   	this.modalCtrl.dismiss({

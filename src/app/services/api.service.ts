@@ -104,8 +104,9 @@ export class ApiService{
     if(!this.syncInProgress){
       this.storage.get('queue').then(que => {
         if(que){
+          console.log('unsynced answers found');
           this.postAnswers({answers: que}).subscribe((resp) => {
-            if(resp.success){
+            if(resp.Success){
               this.storage.set('queue', null).then(que => {
                 resolve(true);
               });

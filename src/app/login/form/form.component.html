@@ -18,10 +18,19 @@
 
 	<ion-item>
 		<ion-label position="stacked">Country <ion-text color="danger">*</ion-text></ion-label>
-		<ion-select formControlName="country" required interface="popover" mode="ios">
+		<ion-input formControlName="country" required></ion-input>
+		<!-- <ion-select formControlName="country" required interface="popover" mode="ios">
 			<ion-select-option value="indian">India</ion-select-option>
 			<ion-select-option value="other">Other</ion-select-option>
-		</ion-select>
+		</ion-select> -->
+
+		<!-- <ionic-selectable
+		    [(ngModel)]="country"
+		    [items]="countries"
+		    itemValueField="name"
+		    itemTextField="name"
+		    [canSearch]="true">
+		  </ionic-selectable> -->
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.country.valid  && (myForm.controls.country.dirty || submitAttempt)">
         <p>Please select valid Country</p>
@@ -54,7 +63,7 @@
 	<ion-item>
 		<ion-label position="stacked">Sampradaay <ion-text color="danger">*</ion-text></ion-label>
 		<ion-select formControlName="sampraday" required interface="popover" mode="ios">
-			<ion-select-option value="Swetamber">Swetamber</ion-select-option>
+			<ion-select-option value="Swetamber">Swetamber Murtipujak</ion-select-option>
 			<ion-select-option value="StanakVasi">StanakVasi</ion-select-option>
 			<ion-select-option value="Digamber">Digamber</ion-select-option>
 			<ion-select-option value="Terapant">Terapant</ion-select-option>
@@ -82,7 +91,7 @@
     </div>
 
 	<ion-item>
-		<ion-label position="stacked">Source of inspiration:</ion-label>
+		<ion-label position="stacked">Source of Inspiration (Reference eg : Araham, Deepika):</ion-label>
 		<ion-textarea formControlName="note"></ion-textarea>
 	</ion-item>
 

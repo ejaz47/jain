@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { LoginFormComponent } from './form/form.component';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -91,7 +92,7 @@ export class LoginPage implements OnInit {
     }
 
     this.googlePlus.login({
-      'webClientId': '641509421493-soqs963bk4ed3fiau4onnoqlbdl926s0.apps.googleusercontent.com',
+      'webClientId': '1086853467587-np8epl1fhq8qfh4p5jsn9gms04954blv.apps.googleusercontent.com',
       'offline': true
     }).then( res => {
       console.log(res);

@@ -53,12 +53,6 @@ export class LoginFormComponent implements OnInit {
 	    });
 	}
 
-
-
-
-
-
-
 	onSubmit() {
 		this.submitAttempt = true;
 		this.onsubmit.emit(this.myForm.valid ? this.myForm.value : false);

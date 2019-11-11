@@ -5,8 +5,8 @@
 	</div> -->
 	<div class="q-div">
 
-		<div style="font-size: 2rem; color: #fff; font-weight: 800;" class="ion-padding">
-			Jainism Survey
+		<div style="font-size: 2rem; color: #fff; font-weight: 800; text-align: center;" class="ion-padding">
+			Global Jainism Survey
 		</div>
 		<div class="avatar-wrap z-depth-4" [hidden]="!userProfile.givenName">
 			<!-- <ion-avatar class="z-depth-4 avatar">
@@ -44,16 +44,22 @@
 		      	value="{{lang}}">{{lang.toUpperCase()}}</ion-select-option>
 		    </ion-select>
 		</div>
-		<div class="logout">
-			<ion-button size="small" color="light" fill="clear" (click)="logout()">
+<!-- 		<div class="logout">
+			<ion-button size="small" color="light" fill="clear" (click)="logout(event)">
 				<ion-icon name="power"></ion-icon>
 				Logout
 			</ion-button>
-		</div>
+		</div> -->
 		<div class="sound">
 			<ion-button size="large" color="light" shape="round" fill="clear" (click)="audioToggel()">
 				<ion-icon name="volume-off" [hidden]="audoStatus"></ion-icon>
 				<ion-icon name="volume-high" [hidden]="!audoStatus"></ion-icon>
+			</ion-button>
+		</div>
+
+		<div class="sound" style="top: 0px; left: 0px; right: auto;bottom: auto;">
+			<ion-button size="large" color="light" shape="round" fill="clear" (click)="openMenu($event)">
+				<ion-icon name="ios-more"></ion-icon>
 			</ion-button>
 		</div>
 	</div>

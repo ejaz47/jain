@@ -138,4 +138,13 @@ export class ApiService{
       })
     });
   }
+
+  getVideos(): Observable<any>{
+    return this.http
+      .post(this.base_path + 'video-list', {}, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
 }

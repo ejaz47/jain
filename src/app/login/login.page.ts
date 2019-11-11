@@ -126,12 +126,7 @@ export class LoginPage implements OnInit {
               this.api.updateHttpOptions(data.token);
               this.storage.set('gmailData', gmailData).then(() => {
                 
-                this.storage.set('disclaimer', 
-                {
-                    video: data.video, 
-                    text: data.disclaimer
-                })
-                .then(() => {
+                this.storage.set('disclaimer', data.disclaimer).then(() => {
                   loading.dismiss();
                 });
 
@@ -142,8 +137,8 @@ export class LoginPage implements OnInit {
 
         // get data from server
         this.data = {
-          videoUrl: this.sanitizer.bypassSecurityTrustResourceUrl(data.video),
-          text: data.disclaimer
+          videoUrl: this.sanitizer.bypassSecurityTrustResourceUrl(data.disclaimer.video),
+          text: data.disclaimer.text
         };
 
         // and move forward

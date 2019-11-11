@@ -6,7 +6,7 @@ import {
   animate,
   transition
 } from "@angular/animations";
-import { ToastController, NavController, AlertController, ModalController } from '@ionic/angular';
+import { ToastController, NavController, AlertController, ModalController, Platform } from '@ionic/angular';
 import { ThanksComponent } from './thanks/thanks.component';
 import { Storage } from '@ionic/storage';
 import { AudioService } from '../services/audio.service';
@@ -130,26 +130,88 @@ export class HomePage {
 
 	database: any;
 	currentQuestion: any;
+  public unsubscribeBackEvent: any;
+  exitAlert: HTMLIonAlertElement;
 
   constructor(public toastController: ToastController,
   						public audio: AudioService,
   						private navCtrl: NavController,
-  						private storage: Storage,
+              private storage: Storage,
+  						private platform: Platform,
   						public modalController: ModalController,
   						public alertController: AlertController) {
 
+    this.initializeBackButtonCustomHandler();
     this.initialize();
   }
   
   ionViewWillLeave(){
     this.audio.stopSlideBg();
     this.audio.playMainBg();
+    this.unsubscribeBackEvent && this.unsubscribeBackEvent.unsubscribe();
+  }
+
+  ionViewWillEnter(){
+    window['completedCategoryId'] = null;
+  }
+  
+  initializeBackButtonCustomHandler(): void {
+    this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(101,  async () => {
+        if(this.exitAlert){
+          await this.exitAlert.dismiss();
+          this.exitAlert = null;
+        }else{
+          this.presentAlertConfirm();
+        }
+        return false;
+    });
+    /* here priority 101 will be greater then 100 
+    if we have registerBackButtonAction in app.component.ts */
+  }
+
+  async presentAlertConfirm() {
+    this.exitAlert = await this.alertController.create({
+      header: 'Alert',
+      mode: 'ios',
+      message: '<strong> This will revert your changes</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.exitAlert = null;
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.navCtrl.back();
+          }
+        }
+      ]
+    });
+
+    await this.exitAlert.present();
   }
 
   async initialize(){
   	console.log(window['selectedCategory']);
   	this.quetions = window['selectedCategory'];
   	this.currentQuestion = 0;
+
+  	let ans: Array<any> = window['selectedAnswers']; 
+  	this.selected = ans.map(item => {
+
+  	});
+
+  	for(let i=0; i < ans.length; i++){
+  		let qid = ans[i]['q_id'];
+  		let answers = ans[i].answer.map(item => {
+  			return item.id;
+  		});
+	  	this.selected[qid] = answers;
+  	}
   }
 
   async itemClicked(quetion, option){
@@ -214,7 +276,7 @@ export class HomePage {
   }
 
   close(){
-  	this.navCtrl.back();
+  	this.presentAlertConfirm();
   }
 
   async finish(){
@@ -264,7 +326,8 @@ export class HomePage {
 	  		}
 	    	que[c_id] = ansArray;
 	    	this.storage.set('queue', que).then(() => {});
-	    	this.close();
+        window['completedCategoryId'] = c_id;
+	    	this.navCtrl.back();
 	  	    setTimeout(() => {
 		    	modal.dismiss();
 		    }, 3500);

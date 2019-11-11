@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ApiService } from '../services/api.service';
-import { IonSlides, LoadingController, NavController } from '@ionic/angular';
+import { IonSlides, LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { AudioService } from '../services/audio.service';
+import { MenuComponent } from './menu/menu.component';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +21,9 @@ export class ProfilePage implements OnInit {
   dataVersion: any;
   audoStatus: any;
   constructor(private storage: Storage,
+              private popoverController: PopoverController,
               public audio: AudioService,
+              public notifi: NotificationService,
   						private loadingCtrl: LoadingController,
   						private navCtrl: NavController,
   						private api: ApiService) { }
@@ -77,6 +81,8 @@ export class ProfilePage implements OnInit {
       this.storage.get('gmailData').then((gdata) => {
         this.userProfile = gdata;
       });
+      let diff = this.totalCount - this.completedCount;
+      this.notifi.schedule(diff + " more badges are waiting, continue survey.");
     });
   }
 
@@ -159,20 +165,12 @@ export class ProfilePage implements OnInit {
   	});
   }
 
-  async logout(){
-    const loading = await this.loadingCtrl.create({
-      mode: 'ios',
-      message: 'Wait...'
+  async openMenu(ev: any){
+    const popover = await this.popoverController.create({
+      component: MenuComponent,
+      event: ev,
+      mode: 'md'
     });
-
-    loading.present();
-    setTimeout(() => {
-      this.api.logout().then(res => {
-        loading.dismiss();
-        if(res){
-          this.navCtrl.navigateRoot('/login');
-        }
-      });
-    },2000);
+    return await popover.present();
   }
 }

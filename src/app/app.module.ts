@@ -13,6 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +28,9 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     IonicStorageModule.forRoot()
   ],
   providers: [
+    InAppBrowser,
+    SocialSharing,
+    LocalNotifications,
     StatusBar,
     SplashScreen,
     GooglePlus,

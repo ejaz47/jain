@@ -1,0 +1,52 @@
+
+ion-card-content{
+    padding: 0px;
+    /* margin: -10px; */
+    height: 33vh;
+    min-height: 250px;
+}
+
+.error{
+	display: flex;
+    flex-direction: column;
+    height: 33vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-color{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradientBG 15s ease infinite;
+}
+
+.close-button{
+    top: -33px;
+    left: -16px;
+    ion-fab-button{
+    	--border-radius: 0px;
+    	height: 92px;
+	    transform: rotate(45deg);
+
+	    ion-icon{
+	    	margin-left: 15px;
+	    }
+    }
+}
+
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

@@ -33,6 +33,7 @@ export class CategoryPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.clickedCat = window['completedCategoryId'];
     if(this.categories){
       this.storage.get('database').then((database) => {
         this.answers = database['answers'];
@@ -46,8 +47,9 @@ export class CategoryPage implements OnInit {
 
   setBadgeInfo(){
     this.categories = this.categories.map(cate => {
-      if(cate.badgeInfo){
-        return false;
+      if(cate.badgeInfo != undefined){
+        cate.badgeInfo = JSON.parse(cate.badgeInfo);
+        return cate;
       }
 
       cate.badgeInfo = {
@@ -68,7 +70,7 @@ export class CategoryPage implements OnInit {
     this.audio.playSlideBg();
     window['selectedCategory'] = this.questions[cate.id];
     window['selectedCategoryInfo'] = cate;
+    window['selectedAnswers'] = this.answers[cate.id];
     this.navCtrl.navigateForward('/home');
-    this.clickedCat = cate.id;
   }
 }

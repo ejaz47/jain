@@ -80,7 +80,8 @@ export class LoginPage implements OnInit {
       // mock sample data
       let gdata = {
         displayName: "Ejaz Ansari",
-        email: "ejaz.portal@gmail.com",
+        email: "vjjadhav9@gmail.com",
+        // email: "ejaz.portal@gmail.com",
         expires: 1572786573,
         expires_in: 3576,
         familyName: "Ansari",

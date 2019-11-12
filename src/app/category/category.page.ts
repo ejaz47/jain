@@ -47,7 +47,7 @@ export class CategoryPage implements OnInit {
 
   setBadgeInfo(){
     this.categories = this.categories.map(cate => {
-      if(cate.badgeInfo != undefined){
+      if(cate.badgeInfo != undefined && cate.badgeInfo){
         cate.badgeInfo = JSON.parse(cate.badgeInfo);
         return cate;
       }

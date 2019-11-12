@@ -30,3 +30,9 @@
 		list-style-type: decimal;		
 	}
 }
+
+ion-label {
+   white-space: normal !important;
+   max-width: none !important;
+   width: 100%;
+}

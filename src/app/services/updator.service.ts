@@ -4,7 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file';
+import { File } from '@ionic-native/file/ngx';
+import { Zip } from '@ionic-native/zip/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { File } from '@ionic-native/file';
 export class UpdatorService {
 
 	private json_url: string;
+	private zip_url: string;
   private installed_version: number = 0;
   httpOptions = {
     headers: new HttpHeaders({
@@ -26,10 +28,11 @@ export class UpdatorService {
   constructor(private http: HttpClient, 
   						private storage: Storage,
   						private transfer: FileTransfer,
+  						private zip: Zip,
   						private file: File) { }
 
-  const fileTransfer: FileTransferObject = this.transfer.create();
-  
+  private fileTransfer: FileTransferObject = this.transfer.create();
+
   isUpdateAvailable(): Promise<boolean>{
   	return new Promise((resolve, reject) => {
   		this.checkUpdate().subscribe(resp => {
@@ -49,8 +52,26 @@ export class UpdatorService {
 
   updateNow(): Promise<any>{
   	return new Promise((resolve, reject) => {
+	  	this.fileTransfer.download(this.zip_url, this.file.dataDirectory + 'web.zip', true).then((entry) => {
+		    console.log('download complete: ' + entry.toURL());
 
-  	});
+		    // unzip 
+		    this.zip.unzip(this.file.dataDirectory + 'web.zip', this.file.dataDirectory + 'web', (progress) => console.log('Unzipping, ' + Math.round((progress.loaded / progress.total) * 100) + '%'))
+				.then((result) => {
+				  if(result === 0){
+				  	// done
+				  	resolve(true);
+				  }else{
+				  	// faild
+				  }
+				});
+
+		  }, (error) => {
+		    // handle error
+		    reject(error);
+		  });
+
+	  });
   }
 
   // private methods

@@ -17,6 +17,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
+import { TranslateModule } from '@ngx-translate/core';
+import { loader } from './services/localize.service';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,7 +28,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 		AppRoutingModule, 
 		BrowserAnimationsModule,
 		HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    TranslateModule.forRoot(loader())
   ],
   providers: [
     InAppBrowser,

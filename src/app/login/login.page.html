@@ -30,6 +30,29 @@
     </ion-slide>
     
     <ion-slide>
+      <div class="q-div" style="height: 100%">
+        <div class="language-select">
+          <div class="ion-padding" style="color: #fff;">
+            <h4>Select Language And Press Continue. <small>(you can change the language Later also)</small></h4>
+          </div>
+          <ion-select 
+            style="color: #fff; font-size: 28px"
+            interface="popover"
+            mode="ios" 
+            placeholder="Language" 
+            [(ngModel)]="selectedLang"
+            (ionChange)="updateLanguage(selectedLang)">
+              <ion-select-option value="english">English</ion-select-option>
+              <ion-select-option value="hindi">Hindi</ion-select-option>
+          </ion-select>
+          <div class="ion-padding">
+            <ion-button color="primary" (click)="next()" disabled="{{!selectedLang}}">Continue</ion-button>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
       <ion-content fullscreen>
       	<div class="q-div">
       		<login-form style="width: 100%" (onsubmit)="onLogin($event)" #myform></login-form>

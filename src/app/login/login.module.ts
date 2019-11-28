@@ -8,6 +8,10 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPage } from './login.page';
 
 import { LoginFormComponent } from './form/form.component';
+import { FormsModule } from '@angular/forms';
+
+import { TranslateModule } from '@ngx-translate/core';
+import { loader } from '../services/localize.service';
 
 const routes: Routes = [
   {
@@ -19,9 +23,11 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    TranslateModule.forChild(loader())
   ],
   declarations: [LoginPage, LoginFormComponent]
 })

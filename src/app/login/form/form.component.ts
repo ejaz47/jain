@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'login-form',
@@ -12,7 +13,7 @@ export class LoginFormComponent implements OnInit {
 	myForm: FormGroup;
 	submitAttempt: boolean = false;
 
-	constructor(private fb: FormBuilder) { }
+	constructor(private fb: FormBuilder, private translate: TranslateService) { }
 
 	ngOnInit() {
 		
@@ -24,6 +25,10 @@ export class LoginFormComponent implements OnInit {
 			gender: ['', [
 				Validators.required,
 				Validators.maxLength(15)
+			]],
+			religion: ['', [
+				Validators.required,
+				Validators.maxLength(255),
 			]],
 			country: ['', [
 				Validators.required,
@@ -58,4 +63,8 @@ export class LoginFormComponent implements OnInit {
 		this.onsubmit.emit(this.myForm.valid ? this.myForm.value : false);
 	}
 
+  updateLanguage(lan){
+    console.log(lan);
+	this.translate.use(lan);
+  }
 }

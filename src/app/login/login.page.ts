@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { LoginFormComponent } from './form/form.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
   @ViewChild('slider', {static: false}) slider: IonSlides;
 	@ViewChild('myform', {static: false}) myForm: LoginFormComponent;
 
+  selectedLang: any;
 	slideOpts = {
 		slidesPerView: 1,
 		touchRatio: 0,
@@ -27,6 +29,7 @@ export class LoginPage implements OnInit {
               private loadingCtrl: LoadingController, 
               private api: ApiService, 
               private storage: Storage,
+              private translate: TranslateService,
               private googlePlus: GooglePlus,
               private navCtrl: NavController) { 
 
@@ -115,6 +118,7 @@ export class LoginPage implements OnInit {
           this.myForm.myForm.setValue({
             age: parseInt(data.data.age) || '',
             gender: data.data.gender || '',
+            religion: data.data.religion || '',
             country: data.data.country || '',
             state: data.data.state || '',
             city: data.data.city || '',
@@ -148,6 +152,14 @@ export class LoginPage implements OnInit {
     }, (error) => {
       alert('Make sure internet connection is on!');
       loading.dismiss();
+    });
+  }
+
+  updateLanguage(lan){
+    console.log(lan);
+    this.storage.set('language', lan).then(() => {
+      console.log(lan);
+      this.translate.use(lan);
     });
   }
 }

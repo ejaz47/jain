@@ -6,7 +6,7 @@
 	<div class="q-div">
 
 		<div style="font-size: 2rem; color: #fff; font-weight: 800; text-align: center;" class="ion-padding">
-			Global Jainism Survey
+			{{ 'PROFILE.title' | translate }}
 		</div>
 		<div class="avatar-wrap z-depth-4" [hidden]="!userProfile.givenName">
 			<!-- <ion-avatar class="z-depth-4 avatar">
@@ -22,7 +22,7 @@
 		</div>
 		<div class="ion-padding" [hidden]="!userProfile.givenName">
 			<ion-button size="large" color="dark" (click)="gotoCategory()" class="hvr-pulse-grow">
-				Start Survey
+				{{'PROFILE.start' | translate}}
 				<ion-icon name="ribbon" style="color: gold"></ion-icon>
 			</ion-button>
 		</div>
@@ -41,7 +41,7 @@
 				[(ngModel)]="selectedLang" 
 				(ionChange)="updateLanguage(selectedLang)">
 		      <ion-select-option *ngFor="let lang of available_languages"
-		      	value="{{lang}}">{{lang.toUpperCase()}}</ion-select-option>
+		      	value="{{lang}}">{{'PROFILE.' + lang.toUpperCase() | translate}}</ion-select-option>
 		    </ion-select>
 		</div>
 <!-- 		<div class="logout">

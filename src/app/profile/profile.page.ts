@@ -5,6 +5,7 @@ import { IonSlides, LoadingController, NavController, PopoverController } from '
 import { AudioService } from '../services/audio.service';
 import { MenuComponent } from './menu/menu.component';
 import { NotificationService } from '../services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfilePage implements OnInit {
               public notifi: NotificationService,
   						private loadingCtrl: LoadingController,
   						private navCtrl: NavController,
+              private translate: TranslateService,
   						private api: ApiService) { }
 
   ngOnInit() {
@@ -100,6 +102,7 @@ export class ProfilePage implements OnInit {
   updateLanguage(lan){
     this.storage.set('language', lan).then(() => {
       console.log(lan);
+      this.translate.use(lan);
     });
   }
 

@@ -1,23 +1,37 @@
 <form class="custom-back ion-text-center" padding [formGroup]="myForm">
 
     <ion-item>
-		<ion-label position="stacked">Age <ion-text color="danger">*</ion-text></ion-label>
+		<ion-label position="stacked">{{'LOGIN.Age' | translate}}<ion-text color="danger">*</ion-text></ion-label>
 		<ion-input formControlName="age" required type="number"></ion-input>
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.age.valid  && (myForm.controls.age.dirty || submitAttempt)">
-        <p>Please enter a valid age.</p>
+        <p>{{'LOGIN.textErr' | translate}}</p>
     </div>
 
     <ion-item>
-		<ion-label position="stacked">Gender <ion-text color="danger">*</ion-text></ion-label>
+		<ion-label position="stacked">{{'LOGIN.Gender' | translate}}<ion-text color="danger">*</ion-text></ion-label>
 		<ion-select formControlName="gender" required interface="popover" mode="ios">
-			<ion-select-option value="male">Male</ion-select-option>
-			<ion-select-option value="female">Female</ion-select-option>
+			<ion-select-option value="male">{{'Male' | translate}}</ion-select-option>
+			<ion-select-option value="female">{{'Female' | translate}}</ion-select-option>
 		</ion-select>
 	</ion-item>
+		<div class="invalid" *ngIf="!myForm.controls.gender.valid  && (myForm.controls.gender.dirty || submitAttempt)">
+        <p>{{'LOGIN.selectErr' | translate}}</p>
+    </div>
 
 	<ion-item>
-		<ion-label position="stacked">Country <ion-text color="danger">*</ion-text></ion-label>
+		<ion-label position="stacked">{{'LOGIN.Religion' | translate}}<ion-text color="danger">*</ion-text></ion-label>
+		<ion-select formControlName="religion" required interface="popover" mode="ios">
+			<ion-select-option value="jain">{{'Jain' | translate}}</ion-select-option>
+			<ion-select-option value="other">{{'Other' | translate}}</ion-select-option>
+		</ion-select>
+	</ion-item>
+		<div class="invalid" *ngIf="!myForm.controls.religion.valid  && (myForm.controls.religion.dirty || submitAttempt)">
+        <p>{{'LOGIN.selectErr' | translate}}</p>
+    </div>
+
+	<ion-item>
+		<ion-label position="stacked">{{'LOGIN.Country' | translate}}<ion-text color="danger">*</ion-text></ion-label>
 		<ion-input formControlName="country" required></ion-input>
 		<!-- <ion-select formControlName="country" required interface="popover" mode="ios">
 			<ion-select-option value="indian">India</ion-select-option>
@@ -33,77 +47,70 @@
 		  </ionic-selectable> -->
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.country.valid  && (myForm.controls.country.dirty || submitAttempt)">
-        <p>Please select valid Country</p>
+        <p>{{'LOGIN.textErr' | translate}}</p>
     </div>
 
 	<ion-item>
-		<ion-label position="stacked">State <ion-text color="danger">*</ion-text></ion-label>
+		<ion-label position="stacked">{{'LOGIN.State' | translate}}<ion-text color="danger">*</ion-text></ion-label>
 		<ion-input formControlName="state" required></ion-input>
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.state.valid  && (myForm.controls.state.dirty || submitAttempt)">
-        <p>Please enter a valid State.</p>
+        <p>{{'LOGIN.textErr' | translate}}</p>
     </div>
 
 	<ion-item>
-		<ion-label position="stacked">City <ion-text color="danger">*</ion-text></ion-label>
+		<ion-label position="stacked">{{'LOGIN.City' | translate}}<ion-text color="danger">*</ion-text></ion-label>
 		<ion-input formControlName="city" required></ion-input>
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.city.valid  && (myForm.controls.city.dirty || submitAttempt)">
-        <p>Please enter a valid city.</p>
+        <p>{{'LOGIN.textErr' | translate}}</p>
     </div>
 
     <ion-item>
-		<ion-label position="stacked">Contact no. <ion-text color="danger">*</ion-text></ion-label>
+		<ion-label position="stacked">{{'LOGIN.Contact' | translate}}<ion-text color="danger">*</ion-text></ion-label>
 		<ion-input formControlName="contact" required type="text"></ion-input>
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.contact.valid  && (myForm.controls.contact.dirty || submitAttempt)">
-        <p>Please enter a valid contact no.</p>
+        <p>{{'LOGIN.textErr' | translate}}</p>
     </div>
 
 	<ion-item>
-		<ion-label position="stacked">Sampradaay <ion-text color="danger">*</ion-text></ion-label>
+		<ion-label position="stacked">{{'Sampradaay' | translate}}<ion-text color="danger">*</ion-text></ion-label>
 		<ion-select formControlName="sampraday" required interface="popover" mode="ios">
-			<ion-select-option value="Swetamber">Swetamber Murtipujak</ion-select-option>
-			<ion-select-option value="StanakVasi">StanakVasi</ion-select-option>
-			<ion-select-option value="Digamber">Digamber</ion-select-option>
-			<ion-select-option value="Terapant">Terapant</ion-select-option>
+			<ion-select-option value="Swetamber">{{'Swetamber Murtipujak' | translate}}</ion-select-option>
+			<ion-select-option value="StanakVasi">{{'StanakVasi' | translate}}</ion-select-option>
+			<ion-select-option value="Digamber">{{'Digamber' | translate}}</ion-select-option>
+			<ion-select-option value="Terapant">{{'Terapant' | translate}}</ion-select-option>
 		</ion-select>
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.sampraday.valid  && (myForm.controls.sampraday.dirty || submitAttempt)">
-        <p>Please enter a valid Sampraday.</p>
+        <p>{{'LOGIN.textErr' | translate}}</p>
     </div>
 
 	<ion-item>
-		<ion-label position="stacked">Qualification <ion-text color="danger">*</ion-text></ion-label>
+		<ion-label position="stacked">{{'Qualification'  | translate}}<ion-text color="danger">*</ion-text></ion-label>
 		<ion-select formControlName="qualification" required interface="popover" mode="ios">
-			<ion-select-option value="No formal education">No formal education</ion-select-option>
-		    <ion-select-option value="Primary education">Primary education</ion-select-option>
-		    <ion-select-option value="Secondary education">Secondary education or high school</ion-select-option>
-		    <ion-select-option value="GED">GED</ion-select-option>
-		    <ion-select-option value="Vocational qualification">Vocational qualification</ion-select-option>
-		    <ion-select-option value="Bachelors degree">Bachelor's degree</ion-select-option>
-		    <ion-select-option value="Masters degree">Master's degree</ion-select-option>
-		    <ion-select-option value="Doctorate or higher">Doctorate or higher</ion-select-option>
+			<ion-select-option value="No formal education">{{'No formal education' | translate}}</ion-select-option>
+		    <ion-select-option value="Primary education">{{'Primary education' | translate}}</ion-select-option>
+		    <ion-select-option value="Secondary education">{{'Secondary education or high school' | translate}}</ion-select-option>
+		    <ion-select-option value="GED">{{'GED' | translate}}</ion-select-option>
+		    <ion-select-option value="Vocational qualification">{{'Vocational qualification' | translate}}</ion-select-option>
+		    <ion-select-option value="Bachelors degree">{{"Bachelor's degree" | translate}}</ion-select-option>
+		    <ion-select-option value="Masters degree">{{"Master's degree" | translate}}</ion-select-option>
+		    <ion-select-option value="Doctorate or higher">{{"Doctorate or higher" | translate}}</ion-select-option>
 		</ion-select>
 	</ion-item>
 	<div class="invalid" *ngIf="!myForm.controls.qualification.valid  && (myForm.controls.qualification.dirty || submitAttempt)">
-        <p>Please enter a valid Qualification.</p>
+        <p>{{'LOGIN.selectErr' | translate}}</p>
     </div>
 
 	<ion-item>
-		<ion-label position="stacked">Source of Inspiration (Reference eg : Araham, Deepika):</ion-label>
-		<ion-textarea formControlName="note"></ion-textarea>
+		<ion-label position="stacked">{{'Referral Code' | translate}}</ion-label>
+		<ion-input formControlName="note"></ion-input>
 	</ion-item>
 
-	<div class="ion-padding note-block">
-		<h6>Note.</h6>
-		<small>
-			<li>You need not mention your name in the questionnaire.</li>
-			<li>This survey is being conducted to ascertain the current status of jainism and to solve the problems faced by mass public.</li>
-			<li>Take initiative to give your views and suggestions whole heartedly with utmost good faith.</li>
-		</small>
-	</div>
+	<div class="ion-padding note-block" [innerHTML]="'LOGIN.note' | translate"> </div>
     <div class="ion-padding">
-	    <ion-button  color="primary" (click)="onSubmit()">Continue</ion-button>
+	    <ion-button  color="primary" (click)="onSubmit()">{{'Continue' | translate}}</ion-button>
 	</div>
 </form>

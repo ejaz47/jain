@@ -34,6 +34,7 @@ export class CategoryPage implements OnInit {
 
   ionViewWillEnter(){
     this.clickedCat = window['completedCategoryId'];
+    window['completedCategoryId'] = null;
     if(this.categories){
       this.storage.get('database').then((database) => {
         this.answers = database['answers'];

@@ -8,6 +8,9 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePage } from './profile.page';
 import { MenuComponent } from './menu/menu.component';
 
+import { TranslateModule } from '@ngx-translate/core';
+import { loader } from '../services/localize.service';
+
 const routes: Routes = [
   {
     path: '',
@@ -24,7 +27,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild(loader())
   ],
   declarations: [ProfilePage, MenuComponent]
 })

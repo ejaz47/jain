@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProfilePage } from './profile.page';
 import { MenuComponent } from './menu/menu.component';
+import { ShareComponent } from './share/share.component';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { loader } from '../services/localize.service';
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: '/menu',
     component: MenuComponent
+  },
+  {
+    path: '/share',
+    component: ShareComponent
   }
 ];
 
@@ -30,6 +35,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TranslateModule.forChild(loader())
   ],
-  declarations: [ProfilePage, MenuComponent]
+  declarations: [ProfilePage, MenuComponent, ShareComponent]
 })
 export class ProfilePageModule {}

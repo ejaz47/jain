@@ -1,0 +1,19 @@
+
+<ion-content fullscreen>
+	<ion-fab vertical="top" horizontal="start" slot="fixed" class="close-button">
+	    <ion-fab-button color="danger" (click)="closeModal()">
+	      <ion-icon name="arrow-round-back"></ion-icon>
+	    </ion-fab-button>
+	</ion-fab>
+	<div style="padding: 10px; text-align: center;">
+		<div [innerHtml]="share_app.share_intro" style="margin-bottom: 77px;"></div>
+		<div class="ion-padding" style="    position: fixed;
+											background: #fff;
+										    bottom: 0px;
+										    width: 100%;
+										    left: 0;
+										    border-top: 1px solid #0000009c;">
+			<ion-button  color="primary" (click)="onSubmit()">{{'Share' | translate}}</ion-button>
+		</div>
+	</div>
+</ion-content>

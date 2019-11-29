@@ -1,0 +1,13 @@
+.close-button{
+    top: -33px;
+    left: -16px;
+    ion-fab-button{
+    	--border-radius: 0px;
+    	height: 92px;
+	    transform: rotate(45deg);
+
+	    ion-icon{
+	    	margin-left: 15px;
+	    }
+    }
+}

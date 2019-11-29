@@ -125,7 +125,7 @@ export class LoginPage implements OnInit {
             contact: data.data.contact || '',
             sampraday: data.data.sampraday || '',
             qualification: data.data.qualification || '',
-            note: data.data.note || ''
+            refered_by: data.data.refered_by || ''
           });
           this.storage.set('userData', data.data).then(() => {
             this.storage.set('token', data.token).then(() => {

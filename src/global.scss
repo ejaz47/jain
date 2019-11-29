@@ -361,3 +361,13 @@ $box-shadow2: ();
   75%{ transform: scale(0.95); }    
   100%{ transform: scale(1); }    
 }
+
+
+.share-modal{
+  .modal-wrapper{
+    margin: 3%;
+    height: 90%;
+    border-radius: 10px;
+  }
+}
+

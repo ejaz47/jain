@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, LoadingController, NavController, AlertController, Platform } from '@ionic/angular';
+import { PopoverController, LoadingController, NavController, AlertController, Platform, ModalController} from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ApiService } from '../../services/api.service';
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NotificationService } from '../../services/notification.service';
+import { ShareComponent } from '../share/share.component';
 
 @Component({
   selector: 'app-menu',
@@ -30,6 +31,7 @@ export class MenuComponent implements OnInit {
   						private loadingCtrl: LoadingController,
   						private navCtrl: NavController,
   						private alert: AlertController,
+              private modalCtrl: ModalController,
   						private api: ApiService) {
 	}
 
@@ -55,11 +57,26 @@ export class MenuComponent implements OnInit {
   	this.navCtrl.navigateForward('videos');
   }
 
+  async openShareModal(){
+    let modal = await this.modalCtrl.create({
+      component: ShareComponent,
+      cssClass: 'share-modal',
+      componentProps: {
+        share_app: this.share_app,
+        shareIt: this.shareIt.bind(this)
+      }
+    });
+    await modal.present();
+    await this.popoverController.dismiss();
+  }
+
 	async shareIt(){
 		let link = this.platform.is("ios") ? this.share_app.ios : this.share_app.android;
-		await this.popoverController.dismiss();
+    let message = "Use my referral code " + this.userData.referal_code;
+    
+    await this.modalCtrl.dismiss();
     await this.socialSharing.share(
-      "Global Jainism Survey", 
+      message, 
       "Global Jainism Survey", 
       null, 
       link || "http:www.example.com/example.apk");

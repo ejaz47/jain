@@ -54,7 +54,7 @@ export class LoginFormComponent implements OnInit {
 				Validators.required,
 				Validators.maxLength(255)
 			]],
-			note: ['', []],
+			refered_by: ['', []],
 	    });
 	}
 

@@ -12,13 +12,12 @@
 			<!-- <ion-avatar class="z-depth-4 avatar">
 			  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
 			</ion-avatar> -->
-			<ion-text class="ion-padding">
-				<h2 style="color: #fff">{{userProfile.givenName}} {{userProfile.familyName}}</h2>
-				<h5 style="color: #fff; text-align: center;">
-					{{completedCount}} Badges
-					<ion-icon name="ribbon" style="color: gold"></ion-icon>
-				</h5>
-			</ion-text>
+			<h2 style="color: #fff">{{userProfile.givenName}} {{userProfile.familyName}}</h2>
+			<h5 style="color: #fff; text-align: center;">
+				{{completedCount}} Badges
+				<ion-icon name="ribbon" style="color: gold"></ion-icon>
+			</h5>
+			<ion-button mode="ios" color="tertiary" size="small" (click)="showCongrats()">{{'Get your Certificate' | translate}}</ion-button>
 		</div>
 		<div class="ion-padding" [hidden]="!userProfile.givenName">
 			<ion-button size="large" color="dark" (click)="gotoCategory()" class="hvr-pulse-grow">

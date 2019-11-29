@@ -6,7 +6,7 @@
 		"ENGLISH": "ENGLISH",
 		"Menu": "मेन्यू",
 		"videos": "वीडियो",
-		"share": "इस एप को शेयर कीजिए",
+		"share": "एप शेयर करें",
 		"contact": "हमसे संपर्क करें",
 		"feedback": "प्रतिक्रिया",
 		"logout": "लोग आउट"
@@ -42,5 +42,7 @@
 	"Master's degree": "Master's degree",
 	"Doctorate or higher": "Doctorate or higher",
 	"Referral Code": "Referral Code",
-	"Continue": "जारी रखें"
+	"Continue": "जारी रखें",
+	"Get your Certificate": "प्रमाण पत्र प्राप्त करें",
+	"congrats": "बहुत बहुत धन्यवाद, आपने सर्वेक्षण पूरा कर लिया है।"
 }

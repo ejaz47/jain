@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ApiService } from '../services/api.service';
-import { IonSlides, LoadingController, NavController, PopoverController } from '@ionic/angular';
+import { Animation } from '@ionic/core';
+import { IonSlides, LoadingController, NavController, PopoverController, ModalController } from '@ionic/angular';
 import { AudioService } from '../services/audio.service';
 import { MenuComponent } from './menu/menu.component';
 import { NotificationService } from '../services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
-
+import { CongratsComponent } from './congrats/congrats.component';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -28,7 +29,8 @@ export class ProfilePage implements OnInit {
   						private loadingCtrl: LoadingController,
   						private navCtrl: NavController,
               private translate: TranslateService,
-  						private api: ApiService) { }
+  						private api: ApiService,
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
   	// check is looged in
@@ -84,8 +86,27 @@ export class ProfilePage implements OnInit {
         this.userProfile = gdata;
       });
       let diff = this.totalCount - this.completedCount;
-      this.notifi.schedule(diff + " more badges are waiting, continue survey.");
+
+      if(diff > 0){
+        // not completed yet
+        this.notifi.schedule(diff + " more badges are waiting, continue survey.");
+      }else{
+        // completed the survey
+        // Show congrats modal 
+        this.showCongrats();
+      }
     });
+  }
+
+  async showCongrats(){
+    let modal = await this.modalCtrl.create({
+      component: CongratsComponent,
+      cssClass: 'congrats-modal',
+      enterAnimation: myEnterAnimation,
+      leaveAnimation: myLeaveAnimation
+    });
+
+    modal.present();
   }
 
   audioToggel(){
@@ -176,4 +197,58 @@ export class ProfilePage implements OnInit {
     });
     return await popover.present();
   }
+}
+
+
+export function myEnterAnimation(AnimationC: Animation, baseEl: HTMLElement): Promise<Animation> {
+
+    const baseAnimation = new AnimationC();
+
+    const backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+
+    const wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.modal-wrapper'));
+
+    wrapperAnimation
+        .fromTo('transform', 'scaleX(0.1) scaleY(0.1)', 'translateX(0%) scaleX(1) scaleY(1)')
+        .fromTo('opacity', 0, 1);
+
+    backdropAnimation.fromTo('opacity', 0.01, 0.4);
+
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.36,0.66,0.04,1)')
+        .duration(400)
+        .beforeAddClass('show-modal')
+        .add(backdropAnimation)
+        .add(wrapperAnimation));
+
+}
+
+export function myLeaveAnimation(AnimationC: Animation, baseEl: HTMLElement): Promise<Animation> {
+
+    const baseAnimation = new AnimationC();
+
+    const backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+
+    const wrapperAnimation = new AnimationC();
+    const wrapperEl = baseEl.querySelector('.modal-wrapper');
+    wrapperAnimation.addElement(wrapperEl);
+    const wrapperElRect = wrapperEl!.getBoundingClientRect();
+
+    wrapperAnimation
+      .fromTo('transform', 'scaleX(1) scaleY(1)', 'scaleX(0.1) scaleY(0.1)')
+      .fromTo('opacity', 1, 0);
+
+    backdropAnimation.fromTo('opacity', 0.4, 0.0);
+
+    return Promise.resolve(baseAnimation
+      .addElement(baseEl)
+      .easing('ease-out')
+      .duration(400)
+      .add(backdropAnimation)
+      .add(wrapperAnimation));
+
 }

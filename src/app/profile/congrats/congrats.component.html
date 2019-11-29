@@ -1,0 +1,30 @@
+
+<ion-content fullscreen>
+	<ion-fab vertical="top" horizontal="start" slot="fixed" class="close-button">
+	    <ion-fab-button color="danger" (click)="closeModal()">
+	      <ion-icon name="arrow-round-back"></ion-icon>
+	    </ion-fab-button>
+	</ion-fab>
+	<div class="pyro">
+	    <div class="before"></div>
+	    <div class="after"></div>
+	</div>
+	<div style="padding: 10px; text-align: center;    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;">
+		<img width="70%" src="./assets/congrats.gif">
+
+		<ion-text color="tertiary">
+			<h3 class="ion-padding" style="font-family: cursive;">
+				{{'congrats' | translate}}
+			</h3>
+		</ion-text>
+
+		<div >
+			<ion-button mode="ios" color="tertiary" size="medium" (click)="getCertificate()">{{'Get your Certificate' | translate}}</ion-button>
+			<ion-button mode="ios" color="success" size="medium" (click)="openShareModal()">{{'PROFILE.share' | translate}}</ion-button>
+		</div>
+	</div>
+</ion-content>

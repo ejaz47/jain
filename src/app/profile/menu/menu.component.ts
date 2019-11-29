@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, LoadingController, NavController, AlertController, Platform, ModalController} from '@ionic/angular';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ApiService } from '../../services/api.service';
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -23,7 +22,6 @@ export class MenuComponent implements OnInit {
 	userData: any;
 
   constructor( public popoverController: PopoverController,
-              private socialSharing: SocialSharing,
               private browser: InAppBrowser,
               public notifi: NotificationService,
               private platform: Platform,
@@ -61,25 +59,9 @@ export class MenuComponent implements OnInit {
     let modal = await this.modalCtrl.create({
       component: ShareComponent,
       cssClass: 'share-modal',
-      componentProps: {
-        share_app: this.share_app,
-        shareIt: this.shareIt.bind(this)
-      }
     });
     await modal.present();
     await this.popoverController.dismiss();
-  }
-
-	async shareIt(){
-		let link = this.platform.is("ios") ? this.share_app.ios : this.share_app.android;
-    let message = "Use my referral code " + this.userData.referal_code;
-    
-    await this.modalCtrl.dismiss();
-    await this.socialSharing.share(
-      message, 
-      "Global Jainism Survey", 
-      null, 
-      link || "http:www.example.com/example.apk");
   }
 
 	async contact(){

@@ -292,7 +292,6 @@ export class HomePage {
       component: ThanksComponent,
       cssClass: 'thanks-modal'
     });
-    await modal.present();
     setTimeout(() => {
     	this.audio.play('complete');
     },500);
@@ -320,7 +319,7 @@ export class HomePage {
     	db.answers[c_id] = ansArray;
     	this.storage.set('database', db).then(() => {});
 
-	  	this.storage.get('queue').then(que => {
+	  	this.storage.get('queue').then(async (que) => {
 	  		if(!que){
 	  			que = {};
 	  		}
@@ -328,7 +327,8 @@ export class HomePage {
 	    	this.storage.set('queue', que).then(() => {});
         window['completedCategoryId'] = c_id;
 	    	this.navCtrl.back();
-	  	    setTimeout(() => {
+        await modal.present();
+  	    setTimeout(() => {
 		    	modal.dismiss();
 		    }, 3500);
 	    });

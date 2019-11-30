@@ -32,7 +32,6 @@ export class CongratsComponent implements OnInit {
 
     if(disclaimer.share_app){
       this.share_app = disclaimer.share_app;
-      this.share_app.share_intro = this.share_app.share_intro || '';
     }
   }
 

@@ -124,8 +124,8 @@ $box-shadow2: ();
 }
 .pyro > .before, .pyro > .after {
   position: absolute;
-  width: 5px;
-  height: 5px;
+  width: 10px;
+  height: 10px;
   /*border-radius: 50%;*/
   box-shadow: $box-shadow2;
   @include animation((1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards));
@@ -145,7 +145,7 @@ $box-shadow2: ();
 @include keyframes(gravity)  {
   to {
     @include transform(translateY(200px));
-    opacity: 0;
+    /*opacity: 0;*/
   }
 }
     
@@ -173,9 +173,9 @@ $box-shadow2: ();
 }
 
 
-.thanks-modal .modal-wrapper{
+/*.thanks-modal .modal-wrapper{
 		background: rgba(0, 0, 0, 0.72);
-}
+}*/
 
 .hvr-pulse-grow {
   display: inline-block;
@@ -379,3 +379,14 @@ $box-shadow2: ();
   }
 }
 
+.thanks-modal{
+  .modal-wrapper{
+    background: rgba(0,0,0,0.72);
+    margin: 3%;
+    height: 70%;
+    border-radius: 10px;
+    ion-content{
+      --background: transparent;
+    }
+  }
+}

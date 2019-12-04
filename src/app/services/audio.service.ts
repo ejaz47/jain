@@ -63,7 +63,7 @@ export class AudioService {
   mainBgAudio: any =  new Audio("assets/audio/track1.mp3");
 	swipeAudio: any =  "assets/audio/question_swipe.mp3";
 	clickAudio: any =  "assets/audio/click.mp3";
-	completeAudio: any =  "assets/audio/complete.m4a";
+	completeAudio: any =  "assets/audio/complete.mp3";
 
 	playSlideBg(){
 		if(this.audioStatus){

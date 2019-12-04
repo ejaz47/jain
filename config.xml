@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="global.jainism.survey" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Jainism Survey</name>
+<widget id="global.jainism.survey" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>JinQ</name>
     <description>Global Jainism Survey</description>
-    <author email="ejaz.ahemed999@gmail.com" href="http://softwarecompaniesinmumbai.com">Ejaz Ansari</author>
+    <author email="ejazahemed999@gmail.com" href="http://softwarecompaniesinmumbai.com">Ejaz Ansari</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -114,8 +114,8 @@
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.1+" />
     </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="3.1.0" />
-    <engine name="android" spec="^7.1.4" />
     <plugin name="cordova-plugin-file-transfer" spec="1.7.1" />
     <plugin name="cordova-plugin-file" spec="6.0.2" />
     <plugin name="cordova-plugin-zip" spec="3.1.0" />
+    <engine name="android" spec="^7.1.4" />
 </widget>

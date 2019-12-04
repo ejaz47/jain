@@ -374,7 +374,7 @@ $box-shadow2: ();
 .congrats-modal{
   .modal-wrapper{
     margin: 3%;
-    height: 70%;
+    max-height: 500px;
     border-radius: 10px;
   }
 }
@@ -383,7 +383,7 @@ $box-shadow2: ();
   .modal-wrapper{
     background: rgba(0,0,0,0.72);
     margin: 3%;
-    height: 70%;
+    max-height: 500px;
     border-radius: 10px;
     ion-content{
       --background: transparent;

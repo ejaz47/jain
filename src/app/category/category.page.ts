@@ -27,6 +27,7 @@ export class CategoryPage implements OnInit {
         this.categories = database[language || "english"]['categories'];
         this.questions = database[language || "english"]['questions'];
         this.answers = database['answers'];
+        console.log(language, this.categories);
         this.setBadgeInfo();
       });
     });

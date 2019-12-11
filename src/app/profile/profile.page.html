@@ -17,7 +17,11 @@
 				{{completedCount}} Badges
 				<ion-icon name="ribbon" style="color: gold"></ion-icon>
 			</h5>
-			<ion-button mode="ios" color="tertiary" size="small" (click)="showCongrats()">{{'Get your Certificate' | translate}}</ion-button>
+			<ion-button mode="ios" 
+						color="tertiary" 
+						size="small" 
+						(click)="showCongrats()"
+						[hidden]="(totalCount - completedCount) > 0">{{'Get your Certificate' | translate}}</ion-button>
 		</div>
 		<div class="ion-padding" [hidden]="!userProfile.givenName">
 			<ion-button size="large" color="dark" (click)="gotoCategory()" class="hvr-pulse-grow">

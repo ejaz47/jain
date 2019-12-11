@@ -85,6 +85,7 @@ export class ProfilePage implements OnInit {
       this.storage.get('gmailData').then((gdata) => {
         this.userProfile = gdata;
       });
+
       let diff = this.totalCount - this.completedCount;
 
       if(diff > 0){
@@ -111,7 +112,7 @@ export class ProfilePage implements OnInit {
 
   audioToggel(){
     this.audio.toggelStatus().then(status => {
-      this.audoStatus = status;
+      this.audoStatus = status; console.log(this.audoStatus);
     });
   }
 

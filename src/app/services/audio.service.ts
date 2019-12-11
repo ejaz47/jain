@@ -50,7 +50,7 @@ export class AudioService {
   toggelStatus(): Promise<any>{
   	return new Promise((resolve, reject) => {
   		this.storage.get('audioStatus').then(status => {
-  			status = status ? false : true;
+  			status = !status;
   			this.storage.set('audioStatus', status).then(() => {
   				resolve(status);
   				this.audioStatus = status;

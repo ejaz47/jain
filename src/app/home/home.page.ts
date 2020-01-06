@@ -35,7 +35,8 @@ export class HomePage {
 
 	slideOpts = {
 		slidesPerView: 1,
-		touchRatio: 0,
+		// touchRatio: 0,
+    allowTouchMove: false,
 	  coverflowEffect: {
 	    rotate: 50,
 	    stretch: 0,

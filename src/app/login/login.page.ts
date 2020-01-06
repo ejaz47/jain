@@ -22,7 +22,8 @@ export class LoginPage implements OnInit {
   selectedLang: any;
 	slideOpts = {
 		slidesPerView: 1,
-		touchRatio: 0,
+		// touchRatio: 0,
+    allowTouchMove: false
 	}
 
   constructor(private sanitizer: DomSanitizer, 

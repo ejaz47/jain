@@ -1,5 +1,5 @@
 
-<ion-content fullscreen>
+<ion-content scrollY="false" fullscreen>
 
 	<ion-fab vertical="top" horizontal="start" slot="fixed" class="close-button">
     <ion-fab-button color="danger" (click)="goback()">
@@ -8,56 +8,61 @@
   </ion-fab>
   <ion-slides [options]="slideOpts" #slider>
     <ion-slide>
+      <ion-content fullscreen>
         <div class="q-div" style="height: 100%">
           <ion-button size="large" fill="outline" color="light" (click)="gmailClick()">
             <!-- <ion-icon name="logo-googleplus"></ion-icon> -->
              Login With Gmail
           </ion-button>
         </div>
+      </ion-content>
     </ion-slide>
+
   	<ion-slide>
-    	<div class="q-div z-depth-1" *ngIf="data.videoUrl">
-	    	<iframe width="100%" height="100%" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" [src]="data.videoUrl" frameborder="0" allowfullscreen></iframe>
-    	</div>
-	  	<div class="answer-box">
-	  		<ion-card>
-	  			{{data.text}}
-	  			<div class="ion-padding">
-		  			<ion-button color="primary" (click)="next()">Continue</ion-button>
-	  			</div>
-		  	</ion-card>
-	  	</div>
+      <ion-content fullscreen>
+      	<div class="q-div z-depth-1" *ngIf="data.videoUrl">
+  	    	<iframe width="100%" height="100%" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" [src]="data.videoUrl" frameborder="0" allowfullscreen></iframe>
+      	</div>
+  	  	<div class="answer-box">
+  	  		<ion-card>
+  	  			{{data.text}}
+  	  			<div class="ion-padding">
+  		  			<ion-button color="primary" (click)="next()">Continue</ion-button>
+  	  			</div>
+  		  	</ion-card>
+  	  	</div>
+      </ion-content>
     </ion-slide>
     
     <ion-slide>
-      <div class="q-div" style="height: 100%">
-        <div class="language-select">
-          <div class="ion-padding" style="color: #fff;">
-            <h4>Select Language And Press Continue. <small>(you can change the language Later also)</small></h4>
-          </div>
-          <ion-select 
-            style="color: #fff; font-size: 28px"
-            interface="popover"
-            mode="ios" 
-            placeholder="Language" 
-            [(ngModel)]="selectedLang"
-            (ionChange)="updateLanguage(selectedLang)">
-              <ion-select-option value="english">English</ion-select-option>
-              <ion-select-option value="hindi">Hindi</ion-select-option>
-          </ion-select>
-          <div class="ion-padding">
-            <ion-button color="primary" (click)="next()" disabled="{{!selectedLang}}">Continue</ion-button>
+      <ion-content fullscreen>
+        <div class="q-div" style="height: 100%">
+          <div class="language-select">
+            <div class="ion-padding" style="color: #fff;">
+              <h4>Select Language And Press Continue. <small>(you can change the language Later also)</small></h4>
+            </div>
+            <ion-select 
+              style="color: #fff; font-size: 28px"
+              interface="popover"
+              mode="ios" 
+              placeholder="Language" 
+              [(ngModel)]="selectedLang"
+              (ionChange)="updateLanguage(selectedLang)">
+                <ion-select-option value="english">English</ion-select-option>
+                <ion-select-option value="hindi">Hindi</ion-select-option>
+            </ion-select>
+            <div class="ion-padding">
+              <ion-button color="primary" (click)="next()" disabled="{{!selectedLang}}">Continue</ion-button>
+            </div>
           </div>
         </div>
-      </div>
+      </ion-content>
     </ion-slide>
 
     <ion-slide>
-      <ion-content fullscreen>
-      	<div class="q-div">
+        <ion-content fullscreen>
       		<login-form style="width: 100%" (onsubmit)="onLogin($event)" #myform></login-form>
-      	</div>
-      </ion-content>
+        </ion-content>
     </ion-slide>
   </ion-slides>
 

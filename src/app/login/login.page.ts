@@ -110,6 +110,39 @@ export class LoginPage implements OnInit {
     });
   }
 
+  async appleClick(){
+    const loading = await this.loadingCtrl.create({
+      mode: 'ios',
+      message: 'Getting...'
+    });
+
+    (window.cordova.plugins as any).SignInWithApple.signin(
+    { requestedScopes: [0, 1] },
+    (succ) => {
+      console.log(succ);
+      // alert(JSON.stringify(succ));
+
+      let gdata = {
+        displayName: succ.fullName.givenName + " " + succ.fullName.familyName,
+        email: succ.email,
+        expires: "",
+        expires_in: "",
+        familyName: succ.fullName.familyName,
+        givenName: succ.fullName.givenName,
+        imageUrl: '',
+        appleData: succ
+      }
+      loading.present();
+      this.getData(loading, gdata);
+
+    },
+    (err) => {
+      console.error(err);
+      // alert(JSON.stringify(err))
+      alert('Please Allow us and Make sure internet connection is on!');
+    });
+  }
+
   getData(loading, gmailData){
     this.api.getUserDetails({ email: gmailData.email })
     .subscribe((data) => {
@@ -132,7 +165,7 @@ export class LoginPage implements OnInit {
             this.storage.set('token', data.token).then(() => {
               this.api.updateHttpOptions(data.token);
               this.storage.set('gmailData', gmailData).then(() => {
-                
+                console.log("this data getting save ", gmailData);
                 this.storage.set('disclaimer', data.disclaimer).then(() => {
                   loading.dismiss();
                 });

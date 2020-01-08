@@ -198,7 +198,7 @@ export class HomePage {
 
   async initialize(){
   	console.log(window['selectedCategory']);
-  	this.quetions = window['selectedCategory'];
+  	this.quetions = this.shuffleArray(window['selectedCategory']);
   	this.currentQuestion = 0;
 
   	let ans: Array<any> = window['selectedAnswers']; 
@@ -335,5 +335,28 @@ export class HomePage {
 	    });
     })
 
+  }
+
+  /**
+   * Randomize array element order in-place.
+   * Using Durstenfeld shuffle algorithm.
+   */
+  shuffleArray(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 }

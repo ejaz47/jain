@@ -8,11 +8,11 @@
 		<div style="font-size: 2rem; color: #fff; font-weight: 800; text-align: center;" class="ion-padding">
 			{{ 'PROFILE.title' | translate }}
 		</div>
-		<div class="avatar-wrap z-depth-4" [hidden]="!userProfile.givenName">
+		<div class="avatar-wrap z-depth-4" [hidden]="!userProfile.displayName">
 			<!-- <ion-avatar class="z-depth-4 avatar">
 			  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
 			</ion-avatar> -->
-			<h2 style="color: #fff">{{userProfile.givenName}} {{userProfile.familyName}}</h2>
+			<h2 style="color: #fff">{{userProfile.displayName}}</h2>
 			<h5 style="color: #fff; text-align: center;">
 				{{completedCount}} Badges
 				<ion-icon name="ribbon" style="color: gold"></ion-icon>

@@ -68,11 +68,15 @@ export class CategoryPage implements OnInit {
   }
 
   open(cate){
-    this.audio.play('click');
-    this.audio.playSlideBg();
-    window['selectedCategory'] = this.questions[cate.id];
-    window['selectedCategoryInfo'] = cate;
-    window['selectedAnswers'] = this.answers[cate.id];
-    this.navCtrl.navigateForward('/home');
+    if(this.answers["1"] || cate.id == 1){
+      this.audio.play('click');
+      this.audio.playSlideBg();
+      window['selectedCategory'] = this.questions[cate.id];
+      window['selectedCategoryInfo'] = cate;
+      window['selectedAnswers'] = this.answers[cate.id];
+      this.navCtrl.navigateForward('/home');
+    }else{
+      alert('Please submit the Rating first!');
+    }
   }
 }

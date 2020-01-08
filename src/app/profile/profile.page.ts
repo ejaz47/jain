@@ -83,6 +83,7 @@ export class ProfilePage implements OnInit {
       });
       // set username
       this.storage.get('gmailData').then((gdata) => {
+        console.log("retrived data", gdata);
         this.userProfile = gdata;
       });
 
